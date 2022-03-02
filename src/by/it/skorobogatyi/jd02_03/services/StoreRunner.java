@@ -4,12 +4,14 @@ import by.it.skorobogatyi.jd02_03.entity.*;
 import by.it.skorobogatyi.jd02_03.utils.RandomData;
 import by.it.skorobogatyi.jd02_03.utils.Sleeper;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static by.it.skorobogatyi.jd02_02.utils.ColouredPrinter.yellowColourPrint;
 
 public class StoreRunner extends Thread {
 
     public final Store store;
-    private volatile int numberOfCashiers;
+    private final AtomicInteger numberOfCashiers = new AtomicInteger(0);
 
     public StoreRunner(Store store) {
         this.store = store;
@@ -41,11 +43,10 @@ public class StoreRunner extends Thread {
 
             for (int i = 0; i < numberOfGeneratedCustomers && managerOfThisStore.shopOpened(); i++) {
 
-                if (conditionCheck(secondOfRun)) {
+                if (definePhaseOfShopWork(secondOfRun)) {
                     if (numberOfActualCustomers <= secondOfRun - minuteOfRun * 60 + 10) {
                         generateAndRunNewCustomerRunner(++customerNumber);
                     }
-
                 } else {
                     if (numberOfActualCustomers <= 40 + (30 - secondOfRun + minuteOfRun * 60)) {
                         generateAndRunNewCustomerRunner(++customerNumber);
@@ -54,9 +55,7 @@ public class StoreRunner extends Thread {
 
                 Sleeper.sleep(1000);
             }
-
         }
-
         yellowColourPrint("Store " + store.name + " closed");
     }
 
@@ -64,7 +63,7 @@ public class StoreRunner extends Thread {
         return store.getManager().getCustomerIn().get() - store.getManager().getCustomerOut().get();
     }
 
-    private boolean conditionCheck(int secondOfRun) {
+    private boolean definePhaseOfShopWork(int secondOfRun) {
         double tempResult = (double) secondOfRun / 60;
         double finalResult = tempResult % 1;
         return finalResult < 0.5;
@@ -75,11 +74,6 @@ public class StoreRunner extends Thread {
         managerRunner.start();
     }
 
-    public void getAndRunNewCashier(int number) {
-        CashierRunner cashierRunner = new CashierRunner(new Cashier(number), store);
-        Thread thread = new Thread(cashierRunner);
-        thread.start();
-    }
 
     private void generateAndRunNewCustomerRunner(int customerNumber) {
         CustomerRunner customerRunner = generateNewCustomerRunner(customerNumber);
@@ -104,11 +98,11 @@ public class StoreRunner extends Thread {
     }
 
     public int getNumberOfCashiers() {
-        return numberOfCashiers;
+        return numberOfCashiers.get();
     }
 
     public void setNumberOfCashiers(int numberOfCashiers) {
-        this.numberOfCashiers = numberOfCashiers;
+        this.numberOfCashiers.set(numberOfCashiers);
     }
 }
 

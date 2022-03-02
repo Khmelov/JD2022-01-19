@@ -1,8 +1,13 @@
 package by.it.skorobogatyi.jd02_03.services;
 
+import by.it.skorobogatyi.jd02_03.entity.Cashier;
 import by.it.skorobogatyi.jd02_03.entity.Manager;
 import by.it.skorobogatyi.jd02_03.entity.Store;
+import by.it.skorobogatyi.jd02_03.utils.Constants;
 import by.it.skorobogatyi.jd02_03.utils.Sleeper;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ManagerRunner extends Thread {
 
@@ -20,59 +25,29 @@ public class ManagerRunner extends Thread {
 
         Manager manager = store.getManager();
 
-        int cashierNumber = 0;
-        while (! manager.shopClosed()) {
+        ExecutorService cashiersThreadPool = Executors.newFixedThreadPool(Constants.OVERALL_THREADS_COUNT);
 
-            int iterationsNUmber = 0;
+        int cashierIndexNumber = 1;
+
+        while (!manager.shopClosed()) {
+
+            int iterationsNumber = 0;
 
             int queueSize = store.getQueue().size();
             int numberOfCashiers = storeRunner.getNumberOfCashiers();
+            int var = (int) Math.ceil(queueSize / 5.);
 
-            if (queueSize > 20) {
-
-                for (int i = 0; i < 5 - numberOfCashiers; i++) {
-                    storeRunner.getAndRunNewCashier(++cashierNumber);
-                    Sleeper.sleep(100);
-                    iterationsNUmber++;
-                }
-                storeRunner.setNumberOfCashiers(numberOfCashiers + iterationsNUmber);
-
-            } else if (queueSize > 15) {
-                for (int i = 0; i < 4 - numberOfCashiers; i++) {
-                    storeRunner.getAndRunNewCashier(++cashierNumber);
-                    Sleeper.sleep(100);
-                    iterationsNUmber++;
-                }
-                storeRunner.setNumberOfCashiers(numberOfCashiers + iterationsNUmber);
-
-            } else if (queueSize > 10) {
-                for (int i = 0; i < 3 - numberOfCashiers; i++) {
-                    storeRunner.getAndRunNewCashier(++cashierNumber);
-                    Sleeper.sleep(100);
-                    iterationsNUmber++;
-                }
-                storeRunner.setNumberOfCashiers(numberOfCashiers + iterationsNUmber);
-
-            } else if (queueSize > 5) {
-                for (int i = 0; i < 2 - numberOfCashiers; i++) {
-                    storeRunner.getAndRunNewCashier(++cashierNumber);
-                    Sleeper.sleep(100);
-                    iterationsNUmber++;
-                }
-                storeRunner.setNumberOfCashiers(numberOfCashiers + iterationsNUmber);
-
-            } else if (queueSize != 0) {
-                for (int i = 0; i < 1 - numberOfCashiers; i++) {
-                    storeRunner.getAndRunNewCashier(++cashierNumber);
-                    Sleeper.sleep(100);
-                    iterationsNUmber++;
-                }
-                storeRunner.setNumberOfCashiers(numberOfCashiers + iterationsNUmber);
-
-            } else {
+            for (int i = 0; i < var - numberOfCashiers; i++) {
+                CashierRunner cashierRunner = new CashierRunner(new Cashier(cashierIndexNumber), store);
+                cashiersThreadPool.submit(cashierRunner);
                 Sleeper.sleep(100);
+                iterationsNumber++;
             }
+
+            storeRunner.setNumberOfCashiers(numberOfCashiers + iterationsNumber);
         }
+
+        cashiersThreadPool.shutdown();
     }
 }
 

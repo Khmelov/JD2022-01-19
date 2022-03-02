@@ -9,4 +9,5 @@ public class Constants {
     public static final String FORMATTING_END = "\u001B[0m";
     public static final String BLUE_COLOUR = "\u001B[34m";
     public static final int QUEUE_CAPACITY = 30;
+    public static final int OVERALL_THREADS_COUNT = 5;
 }
