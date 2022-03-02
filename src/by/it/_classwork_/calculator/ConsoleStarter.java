@@ -3,7 +3,7 @@ package by.it._classwork_.calculator;
 import by.it._classwork_.calculator.controllers.MainController;
 import by.it._classwork_.calculator.repositories.FileRepository;
 import by.it._classwork_.calculator.repositories.VarRepository;
-import by.it._classwork_.calculator.servces.CalcService;
+import by.it._classwork_.calculator.services.CalcService;
 import by.it._classwork_.calculator.utils.PathFinder;
 import by.it._classwork_.calculator.view.ConsolePrinter;
 import by.it._classwork_.calculator.view.Printer;
