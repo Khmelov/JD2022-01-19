@@ -3,7 +3,7 @@ package by.it._classwork_.calculator.controllers;
 import by.it._classwork_.calculator.exceptions.ApplacitionException;
 import by.it._classwork_.calculator.exceptions.CalcException;
 import by.it._classwork_.calculator.model.Var;
-import by.it._classwork_.calculator.servces.CalcService;
+import by.it._classwork_.calculator.services.CalcService;
 
 public class MainController {
     private final CalcService calcService;

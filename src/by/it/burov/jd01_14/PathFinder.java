@@ -15,7 +15,7 @@ public class PathFinder {
     public static String getFilename(Class<?> aClass, String root) {
         String path =  System.getProperty("user.dir")+
                 File.separator+ root+File.separator +
-                aClass.getPackageName().replace(".",File.separator);
+                aClass.getPackageName().replace(".",File.separator).replace("\\jd01_14", File.separator);
         return path;
     }
 }
