@@ -12,7 +12,7 @@ public class Sleeper {
     public static void sleep(double millis){
 
         try {
-            Thread.sleep((long) millis);
+            Thread.sleep((long) millis / Constants.SPEEDUP);
         } catch (InterruptedException e) {
             throw new StoreException(e);
         }

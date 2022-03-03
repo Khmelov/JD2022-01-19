@@ -38,7 +38,7 @@ public class ManagerRunner extends Thread {
             int var = (int) Math.ceil(queueSize / 5.);
 
             for (int i = 0; i < var - numberOfCashiers; i++) {
-                CashierRunner cashierRunner = new CashierRunner(new Cashier(cashierIndexNumber), store);
+                CashierRunner cashierRunner = new CashierRunner(new Cashier(cashierIndexNumber++), store);
                 cashiersThreadPool.submit(cashierRunner);
                 Sleeper.sleep(100);
                 iterationsNumber++;

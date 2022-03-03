@@ -28,9 +28,7 @@ public class CashierRunner implements Runnable {
     @Override
     public void run() {
 
-
         while (!store.getManager().shopClosed()) {
-
 
             Optional<Customer> optionalCustomer = store.getQueue().extract();
             if (optionalCustomer.isPresent()) {

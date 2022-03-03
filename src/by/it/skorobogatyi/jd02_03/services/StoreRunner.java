@@ -1,9 +1,11 @@
 package by.it.skorobogatyi.jd02_03.services;
 
 import by.it.skorobogatyi.jd02_03.entity.*;
+import by.it.skorobogatyi.jd02_03.exceptions.StoreException;
 import by.it.skorobogatyi.jd02_03.utils.RandomData;
 import by.it.skorobogatyi.jd02_03.utils.Sleeper;
 
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static by.it.skorobogatyi.jd02_02.utils.ColouredPrinter.yellowColourPrint;
@@ -12,6 +14,7 @@ public class StoreRunner extends Thread {
 
     public final Store store;
     private final AtomicInteger numberOfCashiers = new AtomicInteger(0);
+    private final Semaphore MAX_CUSTOMRES_COUNT = new Semaphore(20);
 
     public StoreRunner(Store store) {
         this.store = store;
@@ -76,8 +79,16 @@ public class StoreRunner extends Thread {
 
 
     private void generateAndRunNewCustomerRunner(int customerNumber) {
-        CustomerRunner customerRunner = generateNewCustomerRunner(customerNumber);
-        customerRunner.start();
+        try {
+            MAX_CUSTOMRES_COUNT.acquire();
+            CustomerRunner customerRunner = generateNewCustomerRunner(customerNumber);
+            customerRunner.start();
+        } catch (InterruptedException e) {
+            throw new StoreException(e);
+        } finally {
+            MAX_CUSTOMRES_COUNT.release();
+        }
+
     }
 
     private CustomerRunner generateNewCustomerRunner(int customerNumber) {
