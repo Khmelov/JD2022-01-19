@@ -12,9 +12,10 @@ import static by.it.skorobogatyi.jd02_02.utils.ColouredPrinter.yellowColourPrint
 
 public class StoreRunner extends Thread {
 
+    public static final int MAX_CUSTOMERS_COUNT = 20;
     public final Store store;
     private final AtomicInteger numberOfCashiers = new AtomicInteger(0);
-    private final Semaphore MAX_CUSTOMRES_COUNT = new Semaphore(20);
+    private final Semaphore semaphore = new Semaphore(MAX_CUSTOMERS_COUNT);
 
     public StoreRunner(Store store) {
         this.store = store;
@@ -80,13 +81,13 @@ public class StoreRunner extends Thread {
 
     private void generateAndRunNewCustomerRunner(int customerNumber) {
         try {
-            MAX_CUSTOMRES_COUNT.acquire();
+            semaphore.acquire();
             CustomerRunner customerRunner = generateNewCustomerRunner(customerNumber);
             customerRunner.start();
         } catch (InterruptedException e) {
             throw new StoreException(e);
         } finally {
-            MAX_CUSTOMRES_COUNT.release();
+            semaphore.release();
         }
 
     }

@@ -11,12 +11,15 @@ import by.it.skorobogatyi.jd02_03.utils.Sleeper;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
 
 public class CustomerRunner extends Thread implements CustomerAction, ShoppingCartAction {
 
     private final Customer customer;
     private final StoreRunner storeRunner;
     private final Store store;
+    private final int MAX_CARTS_COUNT = 50;
+    protected final Semaphore semaphore = new Semaphore(MAX_CARTS_COUNT);
 
 
     public CustomerRunner(Customer customer, StoreRunner storeRunner, Store store) {
@@ -57,9 +60,15 @@ public class CustomerRunner extends Thread implements CustomerAction, ShoppingCa
 
     @Override
     public void takeCart() {
-
-        customer.setShoppingCart();
-        System.out.println(customer + " took a cart");
+        try {
+            semaphore.acquire();
+            customer.setShoppingCart();
+            System.out.println(customer + " took a cart");
+        } catch (InterruptedException e) {
+            throw new StoreException(e);
+        } finally {
+            semaphore.release();
+        }
     }
 
     @Override
