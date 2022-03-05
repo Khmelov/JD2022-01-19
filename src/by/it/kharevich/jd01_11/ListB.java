@@ -54,15 +54,30 @@ public class ListB <T> implements List <T> {
 
     @Override
     public void add(int index, T element) {
-        System.arraycopy(elements,0,elements,0,index);
-        System.arraycopy(elements,index,elements,index+1,size-index);
+        if (elements.length == size) {
+            int newCapacity = elements.length + (elements.length >> 2) + 1;
+            elements = Arrays.copyOf(elements, newCapacity);
+        }
+        System.arraycopy(elements, index, elements, index + 1, size - index);
         elements[index]=element;
         size++;
     }
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        Object[] newList = c.toArray();
+        int length = newList.length;
+        if (length == 0) {
+            return false;
+        }
+        int newSize = size;
+        if (length > elements.length - newSize) {
+            int newCapacity = elements.length + (elements.length / 2) + 1;
+            elements = Arrays.copyOf(elements, newCapacity);
+        }
+        System.arraycopy(newList, 0, elements, newSize, length);
+        size = newSize + length;
+        return true;
     }
 
     @Override

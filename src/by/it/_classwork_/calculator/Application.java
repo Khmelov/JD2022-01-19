@@ -2,7 +2,7 @@ package by.it._classwork_.calculator;
 
 import by.it._classwork_.calculator.controllers.MainController;
 import by.it._classwork_.calculator.model.Var;
-import by.it._classwork_.calculator.servces.CalcService;
+import by.it._classwork_.calculator.services.CalcService;
 import by.it._classwork_.calculator.view.Printer;
 
 import java.util.Scanner;
