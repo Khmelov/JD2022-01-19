@@ -2,7 +2,7 @@ package by.it.zaretskaya.jd01_09;
 
 import java.util.Scanner;
 
-import static by.it._classwork_.jd01_09.Application.END;
+
 
 public class Application {
 

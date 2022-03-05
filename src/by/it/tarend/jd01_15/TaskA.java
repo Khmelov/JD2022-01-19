@@ -16,7 +16,7 @@ public class TaskA {
     public static final String FILENAME_TO_WRITE = "matrix.txt";
 
     public static void main(String[] args) {
-        int[][] matrix = createMatrix(4, 6, -15, 15);
+        int[][] matrix = createMatrix(6, 4, -15, 15);
         String fileName = PathFinder.getFileName(TaskA.class, ROOT, FILENAME_TO_WRITE);
 
         saveMatrixToTxtFile(matrix, fileName);

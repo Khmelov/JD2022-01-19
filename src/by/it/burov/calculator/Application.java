@@ -1,17 +1,24 @@
 package by.it.burov.calculator;
 
 
+import by.it.burov.calculator.controllers.MainController;
+import by.it.burov.calculator.model.Var;
+import by.it.burov.calculator.services.CalcService;
+import by.it.burov.calculator.view.Printer;
+
 import java.util.Scanner;
 
 public class Application {
     private static final String END = "end";
     private final Printer printer;
-    private final Parser parser;
+    private final CalcService calcService;
+    private final MainController controller;
 
 
-    public Application(Printer printer, Parser parser) {
+    public Application(Printer printer, CalcService parser, MainController controller) {
         this.printer = printer;
-        this.parser = parser;
+        this.calcService = parser;
+        this.controller = controller;
     }
 
     public void run(){
@@ -21,9 +28,9 @@ public class Application {
             String line = scan.nextLine();
             if(!line.equals(END)){
                 try {
-                    Var result = parser.calc(line);
+                    Var result = controller.process(line);
                     printer.print(result);
-                }catch (CalcException e ){
+                }catch (ArithmeticException e){
                     printer.print(e);
                 }
             }else{
