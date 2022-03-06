@@ -1,0 +1,5 @@
+message.welcome = Прывитанне!
+message.question = Як справы?
+user.info = Маё имя
+user.firstname = Максим
+user.lastname = Скарабагаты
