@@ -3,3 +3,4 @@ message.question = Как дела?
 user.info = Меня зовут
 user.firstname = Максим
 user.lastname = Скоробогатый
+message.date = Текущая дата:

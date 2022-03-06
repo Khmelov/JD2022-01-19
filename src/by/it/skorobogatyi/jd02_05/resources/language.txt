@@ -3,3 +3,4 @@ message.question = How are you?
 user.info = My name is
 user.firstname = Maksim
 user.lastname = Skarabahaty
+message.date = Current date:
