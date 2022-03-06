@@ -32,5 +32,19 @@ public class CalcServiceTest {
         double actual = var.getValue();
         assertEquals(expected, actual, 1e-10);
     }
+    @Test
+    public void calcScalarLevelA() throws CalcException {
+        Scalar var = (Scalar)calcService.calc("A=2+2*2");
+        double expected=6;
+        double actual= var.getValue();
+        assertEquals(expected,actual,1e-10);
+    }
+    @Test
+    public void calcScalarSign() throws CalcException {
+        Scalar var = (Scalar)calcService.calc("-2.0--2");
+        double expected=0;
+        double actual= var.getValue();
+        assertEquals(expected,actual,1e-10);
+    }
 
 }
