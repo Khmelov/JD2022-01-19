@@ -1,7 +1,8 @@
 package by.it.chaikova.jd02_03.entity;
 
-import by.it._classwork_.calculator.exceptions.ApplacitionException;
+
 import by.it.chaikova.jd02_03.utils.Constants;
+import by.it.chaikova.jd02_04.exceptions.ApplacitionException;
 
 import java.util.Optional;
 import java.util.concurrent.BlockingDeque;

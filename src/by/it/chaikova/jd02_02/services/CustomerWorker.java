@@ -1,11 +1,12 @@
 package by.it.chaikova.jd02_02.services;
 
-import by.it._classwork_.calculator.exceptions.ApplacitionException;
+
 import by.it.chaikova.jd02_02.entity.Customer;
 import by.it.chaikova.jd02_02.entity.Good;
 import by.it.chaikova.jd02_02.entity.Queue;
 import by.it.chaikova.jd02_02.utils.RandomData;
 import by.it.chaikova.jd02_02.utils.Sleeper;
+import by.it.chaikova.jd02_04.exceptions.ApplacitionException;
 
 public class CustomerWorker extends Thread implements CustomerAction {
 
