@@ -18,12 +18,12 @@ public class TaskC {
         for (int j = 0; j < dirFiles.length; j++) {
             File file = dirFiles[j];
             System.out.println("dir:" + file.getName());
-            File name = new File(fileName);
+        /*    File name = new File(fileName);
             File[] nameFiles = name.listFiles();
             for (int i = 0; i < nameFiles.length; i++) {
                 File file1 = dirFiles[i];
                 System.out.printf("file:%s%n", file1.list());
-            }
+            }*/
         }
     }
 }
