@@ -23,7 +23,11 @@ public class Parser {
 
         expression = expression.replaceAll(CustomPatterns.SPACES, "");
 
-        List<String> operands = new ArrayList<>(Arrays.asList(expression.split(CustomPatterns.OPERATION)));
+        List<String> operands = new ArrayList<>(
+                Arrays.asList(
+                        expression.split(CustomPatterns.OPERATION)
+                )
+        );
         List<String> operations = new ArrayList<>();
         Matcher operationFinder = Pattern.compile(CustomPatterns.OPERATION).matcher(expression);
         while (operationFinder.find()) {
@@ -34,7 +38,7 @@ public class Parser {
         String left = operands.remove(index);
         String right = operands.remove(index);
         String operation = operations.remove(index);
-        AbstractVar result = calcOneOperation(left, operation, right);
+        /*AbstractVar result = */  calcOneOperation(left, operation, right);
 
 
         String[] parts = expression.split(CustomPatterns.OPERATION, 2);
@@ -50,8 +54,8 @@ public class Parser {
             Matcher matcher = Pattern.compile(CustomPatterns.OPERATION).matcher(expression);
 
             if (matcher.find()) {
-                String operation = matcher.group();
-                switch (operation) {
+                String operation1 = matcher.group();
+                switch (operation1) {
                     case "+":
                         return left.add(right);
                     case "-":
@@ -72,6 +76,9 @@ public class Parser {
         throw new CalcException("No such variable");
     }
 
+    private void calcOneOperation(String left, String operation, String right) {
+    }
+
     private int getIndexOperation(List<String> operation) {
         int index = -1;
         int currentPriority = -1;
@@ -82,5 +89,6 @@ public class Parser {
                 index = i;
             }
         }
+        return index;
     }
 }
