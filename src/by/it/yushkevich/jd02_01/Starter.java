@@ -5,7 +5,7 @@ import by.it.yushkevich.jd02_01.services.Store;
 public class Starter {
     public static void main(String[] args) {
 
-        Store store = new Store();
+        Store store = new Store("skjsjks");
         store.start();
 
     }

@@ -2,6 +2,7 @@ package by.it.yushkevich.jd02_01.services;
 
 import by.it.yushkevich.jd02_01.entity.Customer;
 import by.it.yushkevich.jd02_01.exceptions.StoreException;
+import by.it.yushkevich.jd02_01.utils.PriceListRepo;
 import by.it.yushkevich.jd02_01.utils.RandomData;
 import by.it.yushkevich.jd02_01.utils.Sleeper;
 
@@ -10,9 +11,17 @@ import java.util.List;
 
 public class Store extends Thread {
 
+    public final String name;
+    public Store(String name){
+        this.name = name;
+        PriceListRepo.fillingListOfPruducts();
+
+    }
+
     @Override
     public void run() {
         List<Thread> threads = new ArrayList<>();
+        PriceListRepo.fillingListOfPruducts();
 
         System.out.println("Store opened");
 
