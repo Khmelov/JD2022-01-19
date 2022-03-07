@@ -64,9 +64,9 @@ public class CashierRunner implements Runnable {
         int timeForCashier = RandomData.getRandomNumber(2000, 5000);
         Sleeper.sleep(timeForCashier);
 
-        BigDecimal checkForCustomer = BigDecimal.valueOf(0);
         ArrayList<Good> goodListOfCustomer = customer.getShoppingCart().goodList;
-        checkForCustomer = Printer.printCheck(goodListOfCustomer, customer);
+        BigDecimal checkForCustomer;
+        checkForCustomer = Printer.printCheck(goodListOfCustomer, customer, cashier, store);
         store.setOverallMoneyAmount(store.getOverallMoneyAmount().add(checkForCustomer));
 
         cashier.setMoney(cashier.getMoney().add(checkForCustomer));

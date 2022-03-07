@@ -7,10 +7,12 @@ public class Cashier {
 private final String name;
 private BigDecimal money = BigDecimal.valueOf(0);
 public boolean isPaused;
+public final int cashierNumber;
 
 
     public Cashier(int number) {
         name = "Cashier № " + number;
+        cashierNumber = number;
     }
 
     @Override
