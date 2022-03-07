@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
 
@@ -59,12 +59,46 @@ public class ParserTest {
 
         AbstractVar var2 = parser.calc("D=((C-0.15)-20)/(7-5)");
         double expected2 = 10;
-        double actual2 = Double.parseDouble(String.valueOf(var));
+        double actual2 = Double.parseDouble(String.valueOf(var2));
         assertEquals(expected2, actual2, 1e-10);
 
-        AbstractVar var3 = parser.calc("E={2,3}*{D/2}");
-        Vector expected3 = new Vector("{10, 15}");
-        Vector actual3 = new Vector(String.valueOf(var3));
+        AbstractVar var3 = parser.calc("E={2,3}*(D/2)");
+        String expected3 = "{10.0, 15.0}";
+        String actual3 = new Vector(var3.toString()).toString();
         assertEquals(expected3, actual3);
+    }
+
+    @Test
+    public void testMatrix() throws CalcException {
+        AbstractVar var = parser.calc("{{1,2,3},{1,2,3}}+{{1,1,1},{1,1,1}}");
+        String expected = "{{2.0, 3.0, 4.0}, {2.0, 3.0, 4.0}}";
+        String actual = var.toString();
+        assertEquals(expected, actual);
+
+        AbstractVar var2 = parser.calc("{{1,2,3},{1,2,3}}-{{1,1,1},{1,1,1}}");
+        String expected2 = "{{0.0, 1.0, 2.0}, {0.0, 1.0, 2.0}}";
+        String actual2 = var2.toString();
+        assertEquals(expected2, actual2);
+
+        AbstractVar var3 = parser.calc("{{1,2,3},{1,2,3}}/2");
+        String expected3 = "{{0.5, 1.0, 1.5}, {0.5, 1.0, 1.5}}";
+        String actual3 = var3.toString();
+        assertEquals(expected3, actual3);
+
+        AbstractVar var4 = parser.calc("{{1,2,3},{1,2,3}}*2");
+        String expected4 = "{{2.0, 4.0, 6.0}, {2.0, 4.0, 6.0}}";
+        String actual4 = var4.toString();
+        assertEquals(expected4, actual4);
+
+        AbstractVar var5 = parser.calc("{{1,2,3},{1,2,3}}+10");
+        String expected5 = "{{11.0, 12.0, 13.0}, {11.0, 12.0, 13.0}}";
+        String actual5 = var5.toString();
+        assertEquals(expected5, actual5);
+
+        AbstractVar var6 = parser.calc("{{1,2,3},{1,2,3}}*{5,5,5}");
+        String expected6 = "{30.0, 30.0}";
+        String actual6 = var6.toString();
+        assertEquals(expected6, actual6);
+
     }
 }

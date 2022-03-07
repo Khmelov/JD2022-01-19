@@ -23,6 +23,58 @@ public class Parser {
 
         expression = expression.replaceAll(CustomPatterns.SPACES, "");
 
+        if (expression.contains("(")) {
+            expression = resolveBraces(expression);
+        }
+
+        String result = calcWithoutBraces(expression);
+        return AbstractVar.create(result);
+    }
+
+    private String resolveBraces(String expression) throws CalcException {
+
+        String newExpression = expression;
+
+        while (newExpression.contains("(")) {
+
+            int braceCounter = 0;
+            int openBraceIndex = newExpression.indexOf('(');
+            int closeBraceIndex = 0;
+
+            for (int i = openBraceIndex; i < newExpression.length(); i++) {
+                char symbol = newExpression.charAt(i);
+
+                if (symbol == '(') {
+                    braceCounter++;
+                }
+
+                if (symbol == ')') {
+                    braceCounter--;
+                }
+
+                if (braceCounter == 0) {
+                    closeBraceIndex = i;
+                    break;
+                }
+            }
+
+            String subExpression = newExpression.substring(openBraceIndex + 1, closeBraceIndex);
+
+            String recursiveString;
+            if (subExpression.contains("(")) {
+                recursiveString = resolveBraces(subExpression);
+            } else {
+                recursiveString = subExpression;
+            }
+
+            String replacementExpression = calcWithoutBraces(recursiveString);
+            newExpression = newExpression.replace("(" + subExpression + ")", replacementExpression);
+        }
+        return newExpression;
+    }
+
+    private String calcWithoutBraces(String expression) throws CalcException {
+
         List<String> operands = new ArrayList<>(
                 Arrays.asList(
                         expression.split(CustomPatterns.OPERATION)
@@ -44,7 +96,7 @@ public class Parser {
             operands.add(index, result.toString());
         }
 
-        return AbstractVar.create(operands.get(0));
+        return operands.get(0);
     }
 
     private AbstractVar calcOneOperation(String leftStr, String operation, String rightStr) throws CalcException {

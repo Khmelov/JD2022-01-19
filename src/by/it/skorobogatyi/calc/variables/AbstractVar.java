@@ -9,6 +9,8 @@ public abstract class AbstractVar implements Operation {
 
     public static AbstractVar create(String varValue) throws CalcException {
 
+        varValue = varValue.replaceAll(" ", "");
+
         if (varValue.matches(CustomPatterns.SCALAR)) {
             return new Scalar(varValue);
 
