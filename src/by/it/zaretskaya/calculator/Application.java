@@ -29,6 +29,7 @@ public class Application {
             if (!line.equals(END)) {
 try{
     Var result = controller.process(line);
+    printer.print(result);
 
 }catch (ApplicationException e){
     printer.print(e);

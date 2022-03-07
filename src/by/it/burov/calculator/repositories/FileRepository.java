@@ -58,7 +58,7 @@ public class FileRepository implements VarRepository {
             throw new ApplicationException(e);
         }
 
-        return null;
+        return value;
     }
 
     @Override

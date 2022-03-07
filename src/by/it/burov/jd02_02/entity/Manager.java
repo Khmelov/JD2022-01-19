@@ -1,9 +1,9 @@
 package by.it.burov.jd02_02.entity;
 
 public class Manager {
-    public final int planCount;
-    public volatile int countCustomerIn;
-    public volatile int countCustomerOut;
+    private final int planCount;
+    private volatile int countCustomerIn;
+    private volatile int countCustomerOut;
 
     public Manager(int planCount) {
         this.planCount = planCount;

@@ -106,7 +106,7 @@ public class Vector extends Var {
         outPut.append("{");
         for (double element : value) {
             outPut.append(delimiter).append(element);
-            delimiter = ", ";
+            delimiter = ",";
         }
         outPut.append("}");
         return outPut.toString();
