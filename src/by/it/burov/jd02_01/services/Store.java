@@ -28,11 +28,10 @@ public class Store extends Thread {
         List<Thread> threads = new ArrayList<>();
         for (int time = 0; time < 120; time++) {
             int count = RandomData.get(10, 15);
-            customerNumber = attendance(customerNumber, threads, time, count);
+            customerNumber = rushHours(customerNumber, threads, time, count);
             Sleeper.sleep(1000);
         }
         for (Thread thread : threads) {
-
             try {
                 thread.join();
             } catch (InterruptedException e) {
@@ -42,7 +41,7 @@ public class Store extends Thread {
         System.out.println("Store " + name + " closed");
     }
 
-    private int attendance(int customerNumber, List<Thread> threads, int time, int count) {
+    private int rushHours(int customerNumber, List<Thread> threads, int time, int count) {
         for (int i = 0; i < count; i++) {
             if (time <= 30) {
                 if (customerNumber <= time + 10) {

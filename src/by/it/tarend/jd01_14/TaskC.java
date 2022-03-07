@@ -9,10 +9,8 @@ public class TaskC {
 
     public static void main(String[] args) {
 
-        String pathToClass = PathFinder.getFileName(TaskC.class, ROOT, TaskC.class.getSimpleName()).replaceAll(File.separator+TaskC.class.getSimpleName(), "");
-
-        String pathToSurname = getSurnameDirectory(pathToClass);
-
+        String pathToClass = PathFinder.getFileName(TaskC.class, ROOT, TaskC.class.getSimpleName());
+        String pathToSurname = getParentDirectory(getParentDirectory(pathToClass));
         File surnameDirectory = new File(pathToSurname);
 
         String listOfAll = getListOfAll(pathToSurname, surnameDirectory);
@@ -33,10 +31,6 @@ public class TaskC {
             if (subDirectory.isDirectory()) {
                 listOfAll.append("dir:").append(element).append("\n");
                 listOfAll.append(getListOfAll(pathToElement, subDirectory));
-/*                String[] listOfSubDirectory = subDirectory.list();
-                for (String file : listOfSubDirectory) {
-                    listOfAll.append("file:").append(file).append("\n");
-                }*/
             } else {
                 listOfAll.append("file:").append(element).append("\n");
             }
@@ -44,10 +38,9 @@ public class TaskC {
         return listOfAll.toString();
     }
 
-    private static String getSurnameDirectory(String pathToClass) {
+    private static String getParentDirectory(String pathToClass) {
         File file = new File(pathToClass);
         String parent = file.getParent();
-        System.out.println(parent);
         return parent;
     }
 }

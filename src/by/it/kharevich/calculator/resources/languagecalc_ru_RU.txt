@@ -1,0 +1,14 @@
+message.one=ОШИБКА:
+message.two=ОШИБКА: деление на ноль
+message.addition=Операция сложения
+message.subtraction=Операция вычитания
+message.multiplication=Операция умножения
+message.division=Операция деления
+message.abstr=абстрактная переменная
+message.impossible=невозможно
+message.nf=НЕ НАЙДЕНО
+message.io=НЕПРАВИЛЬНАЯ ОПЕРАЦИЯ
+message.ios=НЕПРАВИЛЬНАЯ РАБОТА С СИМВОЛОМ
+message.end=конец
+message.start=Приложение стартовало
+message.stop=Приложение завершено

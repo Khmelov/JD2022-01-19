@@ -20,9 +20,6 @@ public class Good {
 
     @Override
     public String toString() {
-        return "Good{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                '}';
+        return name + " by price = " + price;
     }
 }
