@@ -3,7 +3,6 @@ package by.it.kustova.jd02_03.entity;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Manager {
-
     private final int planCount;
     private final AtomicInteger countCustomerIn = new AtomicInteger(0);
     private final AtomicInteger countCustomerOut = new AtomicInteger(0);

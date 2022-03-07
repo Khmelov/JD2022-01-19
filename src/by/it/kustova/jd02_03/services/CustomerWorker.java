@@ -5,17 +5,26 @@ import by.it.kustova.jd02_03.entity.Customer;
 import by.it.kustova.jd02_03.entity.Good;
 import by.it.kustova.jd02_03.entity.Queue;
 import by.it.kustova.jd02_03.entity.Store;
+import by.it.kustova.jd02_03.utils.PriceListRepo;
 import by.it.kustova.jd02_03.utils.RandomData;
 import by.it.kustova.jd02_03.utils.Sleeper;
 
-public class CustomerWorker extends Thread implements CustomerAction {
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.Semaphore;
+
+public class CustomerWorker extends Thread implements CustomerAction, ShoppingCardAction {
 
     private final Customer customer;
     private final Store store;
+    private final Semaphore semaphore;
+    private int buyGoods = 0;
 
-    public CustomerWorker(Store store, Customer customer) {
+    public CustomerWorker(Customer customer, Store store, Semaphore semaphore) {
         this.customer = customer;
         this.store = store;
+        this.semaphore = semaphore;
         this.setName("Worker for " + customer.toString() + " ");
         store.getManager().customerIn();
 
@@ -24,8 +33,30 @@ public class CustomerWorker extends Thread implements CustomerAction {
     @Override
     public void run() {
         enteredStore();
-        Good good = chooseGood();
-        System.out.println(customer + " choose " + good);
+        takeCart();
+        try {
+            for (int i = 0; i < 20; i++) {
+
+                semaphore.acquire();
+                System.out.println(customer + " is choosing goods");
+                Sleeper.sleep(5);
+
+                System.out.println(customer + " chooses goods");
+                semaphore.release();
+
+                Sleeper.sleep(5);
+            }
+
+        } catch (InterruptedException e) {
+            throw new ApplacitionException(e);
+        }
+        int fillCart = RandomData.get(2, 5);
+        for (int i = 0; i < fillCart; i++) {
+            Good good = chooseGood();
+            putToCart(good);
+            System.out.println(customer + " put to cart goods № " + i + " " + good);
+        }
+        goToQueue();
         goOut();
         store.getManager().customerGoOut();
     }
@@ -36,17 +67,30 @@ public class CustomerWorker extends Thread implements CustomerAction {
     }
 
     @Override
+    public void takeCart() {
+        customer.setCart();
+        System.out.println(customer + "is taking cart!");
+    }
+
+    @Override
     public Good chooseGood() {
-        System.out.println(customer + " started to choose goods");
         int timeout = RandomData.get(500, 2000);
         Sleeper.sleep(timeout);
-        System.out.println(customer + " finished choose goods");
-        return new Good();
+        int randomGoods = RandomData.get(PriceListRepo.priceList.size() - 1);
+        Map.Entry<String, BigDecimal> entry = PriceListRepo
+                .priceList
+                .entrySet()
+                .stream()
+                .toList()
+                .get(randomGoods);
+        Good goods = new Good(entry.getKey(), entry.getValue());
+        Sleeper.sleep(RandomData.get(100, 300));
+        return goods;
     }
 
     @Override
     public void goToQueue() {
-        System.out.println(customer + " waiting in Queue");
+        System.out.println(customer + "waiting in Queue");
         synchronized (customer) {
             Queue queue = store.getQueue();
             queue.add(customer);
@@ -59,11 +103,21 @@ public class CustomerWorker extends Thread implements CustomerAction {
                 }
             }
         }
-        System.out.println(customer + " left the Queue");
+        System.out.println(customer + "left the Queue");
     }
 
     @Override
     public void goOut() {
         System.out.println(customer + " go out");
     }
+
+
+    @Override
+    public int putToCart(Good good) {
+        ArrayList<Good> goodList = (ArrayList<Good>) customer.getShoppingCard().goods;
+        goodList.add(good);
+        return goodList.size();
+    }
+
+
 }

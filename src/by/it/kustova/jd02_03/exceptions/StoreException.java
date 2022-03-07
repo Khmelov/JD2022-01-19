@@ -3,6 +3,7 @@ package by.it.kustova.jd02_03.exceptions;
 public class StoreException extends RuntimeException{
 
     public StoreException() {
+        super();
     }
 
     public StoreException(String message) {
