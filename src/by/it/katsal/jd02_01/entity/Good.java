@@ -1,24 +1,24 @@
 package by.it.katsal.jd02_01.entity;
 
+import java.math.BigDecimal;
+
 public class Good {
 
     public final String name;
-    public final double price;
+    public final BigDecimal price;
 
-    public Good(String name, double price) {
+    public Good(String name, BigDecimal price) {
         this.name = name;
         this.price = price;
     }
 
     public Good() {
-        this("noname", 0);
+        this("noname",BigDecimal.valueOf(0));
+
     }
 
     @Override
     public String toString() {
-        return "Good{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                '}';
+        return name + " (" + price+" BYN)";
     }
 }

@@ -1,8 +1,8 @@
 package by.it.katsal.jd02_01.exceptions;
 
 public class StoreException extends RuntimeException{
-
     public StoreException() {
+        super();
     }
 
     public StoreException(String message) {
@@ -16,4 +16,6 @@ public class StoreException extends RuntimeException{
     public StoreException(Throwable cause) {
         super(cause);
     }
+
+
 }

@@ -1,17 +1,21 @@
 package by.it.katsal.jd02_01.entity;
 
-public class Customer {
+public class Student extends Customer {
+
     private final String name;
     private ShoppingCart shoppingCart;
 
-    public Customer(int number) {
-        name = "Customer " + number;
+    public Student(int number) {
+        super(number);
+        this.name = "Student " + number;
     }
 
+    @Override
     public ShoppingCart getShoppingCart() {
-        return shoppingCart;
+        return this.shoppingCart;
     }
 
+    @Override
     public void setShoppingCart() {
         this.shoppingCart = new ShoppingCart();
     }
