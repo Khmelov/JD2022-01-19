@@ -84,6 +84,7 @@ public class CalcServiceTest {
         System.out.println("\nTest Task C");
         matrixAssert(expected1, actual1);
         assertArrayEquals(expected2, actual2, 1e-10);
+        matrixAssert(expected3, actual3);
         System.out.println(matrixToString(actual1));
         vectorToString(actual2);
         System.out.println(matrixToString(actual3));
