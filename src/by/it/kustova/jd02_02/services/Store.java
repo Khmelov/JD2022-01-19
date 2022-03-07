@@ -5,6 +5,7 @@ import by.it.kustova.jd02_02.entity.Customer;
 import by.it.kustova.jd02_02.entity.Manager;
 import by.it.kustova.jd02_02.entity.Queue;
 import by.it.kustova.jd02_02.exceptions.StoreException;
+import by.it.kustova.jd02_02.utils.PriceListRepo;
 import by.it.kustova.jd02_02.utils.RandomData;
 import by.it.kustova.jd02_02.utils.Sleeper;
 
@@ -13,12 +14,13 @@ import java.util.List;
 
 public class Store extends Thread {
 
-    private final Manager manager;
     private final Queue queue;
+    private final Manager manager;
 
-    public Store(Manager manager, Queue queue) {
-        this.manager = manager;
+    public Store(Queue queue, Manager manager) {
         this.queue = queue;
+        this.manager = manager;
+        PriceListRepo.PriceGoods();
     }
 
     public Queue getQueue() {
@@ -46,15 +48,12 @@ public class Store extends Thread {
             int count = RandomData.get(2);
             for (int i = 0; i < count && manager.shopOpened(); i++) {
                 Customer customer = new Customer(++number);
-                CustomerWorker customerWorker = new CustomerWorker(this, customer);
+                CustomerWorker customerWorker = new CustomerWorker(customer, this);
                 threads.add(customerWorker);
                 customerWorker.start();
             }
             Sleeper.sleep(1000);
         }
-
-
-
         for (Thread thread : threads) {
             try {
                 thread.join();

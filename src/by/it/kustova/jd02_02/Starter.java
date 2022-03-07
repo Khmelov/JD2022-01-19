@@ -14,7 +14,7 @@ public class Starter {
     public static void main1(String[] args) {
         Manager manager = new Manager(100);
         Queue queue = new Queue();
-        Store store = new Store(manager, queue);
+        Store store = new Store(queue, manager);
         store.start();
     }
 }
