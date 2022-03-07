@@ -54,7 +54,7 @@ public class CalcServiceTest {
 
     @Test
     public void calcVectorTaskB() throws CalcException {
-        Scalar var1 = (Scalar) calcService.calc("C=B+(A*2)");  // не передается значение А
+        Scalar var1 = (Scalar) calcService.calc("C=B+(A*2)");  // только с FileRepository смог передать переменные в этот метод
         double expected1 = 40.15;
         double real1 = var1.getValue();
         assertEquals(expected1, real1, 1e-10);
