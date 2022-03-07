@@ -28,64 +28,62 @@ public class Parser {
                         expression.split(CustomPatterns.OPERATION)
                 )
         );
+
         List<String> operations = new ArrayList<>();
         Matcher operationFinder = Pattern.compile(CustomPatterns.OPERATION).matcher(expression);
         while (operationFinder.find()) {
             operations.add(operationFinder.group());
         }
 
-        int index = getIndexOperation(operations);
-        String left = operands.remove(index);
-        String right = operands.remove(index);
-        String operation = operations.remove(index);
-        /*AbstractVar result = */  calcOneOperation(left, operation, right);
-
-
-        String[] parts = expression.split(CustomPatterns.OPERATION, 2);
-
-        if (parts.length == 1) {
-            return AbstractVar.create(expression);
+        while (!operations.isEmpty()) {
+            int index = getIndexOperation(operations);
+            String left = operands.remove(index);
+            String right = operands.remove(index);
+            String operation = operations.remove(index);
+            AbstractVar result = calcOneOperation(left, operation, right);
+            operands.add(index, result.toString());
         }
 
-        AbstractVar left = AbstractVar.create(parts[0]);
-        AbstractVar right = AbstractVar.create(parts[1]);
+        return AbstractVar.create(operands.get(0));
+    }
 
-        if (left != null && right != null) {
-            Matcher matcher = Pattern.compile(CustomPatterns.OPERATION).matcher(expression);
+    private AbstractVar calcOneOperation(String leftStr, String operation, String rightStr) throws CalcException {
 
-            if (matcher.find()) {
-                String operation1 = matcher.group();
-                switch (operation1) {
-                    case "+":
-                        return left.add(right);
-                    case "-":
-                        return left.sub(right);
-                    case "*":
-                        return left.mul(right);
-                    case "/":
-                        return left.div(right);
-                    case "=":
-                        VariablesStorage.variables.put(String.valueOf(left), right);
-                        return right;
-                    default:
-                        String message = "Incorrect expression: " + expression;
-                        throw new CalcException(message);
-                }
-            }
+        AbstractVar right = AbstractVar.create(rightStr);
+
+        if (operation.equals("=")) {
+            VariablesStorage.variables.put(leftStr, right);
+            return right;
         }
-        throw new CalcException("No such variable");
+
+        AbstractVar left = AbstractVar.create(leftStr);
+
+        if (left == null || right == null) {
+            throw new CalcException("Incorrect operation: " + leftStr + operation + rightStr);
+        }
+
+        switch (operation) {
+            case "+":
+                return left.add(right);
+            case "-":
+                return left.sub(right);
+            case "*":
+                return left.mul(right);
+            case "/":
+                return left.div(right);
+            default:
+                String message = "Incorrect expression";
+                throw new CalcException(message);
+        }
     }
 
-    private void calcOneOperation(String left, String operation, String right) {
-    }
-
-    private int getIndexOperation(List<String> operation) {
+    private int getIndexOperation(List<String> operations) {
         int index = -1;
         int currentPriority = -1;
-        for (int i = 0; i < operation.size(); i++) {
-            String op = operation.get(i);
-            if (currentPriority < priorityMap.get(op)) {
-                currentPriority = priorityMap.get(op);
+        for (int i = 0; i < operations.size(); i++) {
+            String operation = operations.get(i);
+            if (currentPriority < priorityMap.get(operation)) {
+                currentPriority = priorityMap.get(operation);
                 index = i;
             }
         }
