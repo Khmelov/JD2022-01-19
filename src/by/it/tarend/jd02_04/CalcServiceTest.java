@@ -17,8 +17,8 @@ public class CalcServiceTest {
 
     private static CalcService calcService;
 
-    @BeforeClass
-    public static void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         VarRepository repository = new MapRepository();
         calcService = new CalcService(repository);
     }
