@@ -8,6 +8,8 @@ public interface CustomerAction {
 
     Good chooseGood();
 
+    void goToQueue();
+
     void goOut();
 
 }

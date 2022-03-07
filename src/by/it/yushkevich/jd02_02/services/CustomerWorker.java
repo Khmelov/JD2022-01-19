@@ -2,6 +2,7 @@ package by.it.yushkevich.jd02_02.services;
 
 import by.it.yushkevich.jd02_02.entity.Customer;
 import by.it.yushkevich.jd02_02.entity.Good;
+import by.it.yushkevich.jd02_02.entity.Queue;
 import by.it.yushkevich.jd02_02.utils.PriceListRepo;
 import by.it.yushkevich.jd02_02.utils.RandomData;
 import by.it.yushkevich.jd02_02.utils.Sleeper;
@@ -21,6 +22,7 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
         this.store = store;
 
         this.setName("Worker for " + customer.toString() + " "); //т.к. это поток то можем вот так поставить имя
+        store.getManager().customerIn();
 
     }
 
@@ -38,6 +40,7 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
         }
 
         goOut();
+        store.getManager().customerGoOut();
 
     }
 
@@ -63,8 +66,29 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
     }
 
     @Override
+    public void goToQueue() {
+        System.out.println(customer + " ожидает в очереди");
+        synchronized (customer) {
+            Queue queue = store.getQueue();
+            queue.add(customer);
+            customer.setWaiting(true);
+            while (customer.isWaiting()) {
+                try {
+                    customer.wait(); // ожидание по монитору
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }
+        System.out.println(customer + " покинул очередь");
+
+    }
+
+    @Override
     public void goOut() {
         System.out.println(customer + " вышел из магазина");
+
     }
 
     @Override
