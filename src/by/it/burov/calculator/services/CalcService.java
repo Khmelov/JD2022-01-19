@@ -70,29 +70,20 @@ public class CalcService {
                     bracketCounter--;
                     closeBracketPosition = i;
 
-                    if (bracketCounter > 0) {
+                    if (bracketCounter > 0 || (bracketCounter==0 && checkedExpression.contains("("))) {
                         String subExpression = checkedExpression.substring(openBracketPosition + 1, closeBracketPosition);
                         checkedExpression = checkedExpression.replace("(" + subExpression + ")", getVar(subExpression));
                         if (checkedExpression.contains("(")) {
                             expressionWithoutBrackets = bracketControl(checkedExpression);
                             break;
+                        }else{
+                            expressionWithoutBrackets = checkedExpression;
+                            return expressionWithoutBrackets;
                         }
                     }
                 }
-
-                if (bracketCounter == 0) {
-                    break;
-                }
             }
             if (expressionWithoutBrackets != null) {
-                return expressionWithoutBrackets;
-            }
-
-            String subExpression = checkedExpression.substring(openBracketPosition + 1, closeBracketPosition);
-            if (subExpression.contains("(")) {
-                bracketControl(subExpression);
-            } else {
-                expressionWithoutBrackets = checkedExpression.replace("(" + subExpression + ")", getVar(subExpression));
                 return expressionWithoutBrackets;
             }
         }
