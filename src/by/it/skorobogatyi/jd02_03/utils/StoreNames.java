@@ -1,5 +1,6 @@
 package by.it.skorobogatyi.jd02_03.utils;
 
+@SuppressWarnings("SpellCheckingInspection")
 public enum StoreNames {
     Evroopt,
     Gippo,

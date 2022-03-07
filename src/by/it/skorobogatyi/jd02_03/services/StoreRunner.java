@@ -8,7 +8,7 @@ import by.it.skorobogatyi.jd02_03.utils.Sleeper;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static by.it.skorobogatyi.jd02_02.utils.ColouredPrinter.yellowColourPrint;
+import static by.it.skorobogatyi.jd02_03.utils.ColouredPrinter.yellowColourPrint;
 
 public class StoreRunner extends Thread {
 
@@ -16,6 +16,7 @@ public class StoreRunner extends Thread {
     public final Store store;
     private final AtomicInteger numberOfCashiers = new AtomicInteger(0);
     private final Semaphore semaphore = new Semaphore(MAX_CUSTOMERS_COUNT);
+
 
     public StoreRunner(Store store) {
         this.store = store;
@@ -78,7 +79,6 @@ public class StoreRunner extends Thread {
         managerRunner.start();
     }
 
-
     private void generateAndRunNewCustomerRunner(int customerNumber) {
         try {
             semaphore.acquire();
@@ -116,6 +116,7 @@ public class StoreRunner extends Thread {
     public void setNumberOfCashiers(int numberOfCashiers) {
         this.numberOfCashiers.set(numberOfCashiers);
     }
+
 }
 
 

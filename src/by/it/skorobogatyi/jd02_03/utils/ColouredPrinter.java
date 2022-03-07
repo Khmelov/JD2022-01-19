@@ -12,10 +12,4 @@ public class ColouredPrinter {
         System.out.println(BLUE_COLOUR + message + FORMATTING_END);
 
     }
-
-    public static void blueColourPrintFor50Signs(String message) {
-        System.out.printf(BLUE_COLOUR + "%-50s|%n" + FORMATTING_END, message);
-
-    }
-
 }

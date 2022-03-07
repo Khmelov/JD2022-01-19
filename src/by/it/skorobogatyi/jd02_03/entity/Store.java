@@ -3,12 +3,15 @@ package by.it.skorobogatyi.jd02_03.entity;
 import by.it.skorobogatyi.jd02_03.utils.RandomData;
 import by.it.skorobogatyi.jd02_03.utils.StoreNames;
 
+import java.math.BigDecimal;
+
 public class Store {
 
     public final String name;
     private final ShopQueue shopQueue;
     private final Manager manager;
     private final GoodsAndPricesStorage storage;
+    private BigDecimal overallMoneyAmount = BigDecimal.valueOf(0);
 
 
     public Store(String name, ShopQueue shopQueue, Manager manager) {
@@ -45,5 +48,13 @@ public class Store {
 
     public GoodsAndPricesStorage getStorage() {
         return storage;
+    }
+
+    public BigDecimal getOverallMoneyAmount() {
+        return overallMoneyAmount;
+    }
+
+    public void setOverallMoneyAmount(BigDecimal overallMoneyAmount) {
+        this.overallMoneyAmount = overallMoneyAmount;
     }
 }

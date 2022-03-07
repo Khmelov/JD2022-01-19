@@ -4,6 +4,7 @@ import by.it.skorobogatyi.jd02_03.entity.Cashier;
 import by.it.skorobogatyi.jd02_03.entity.Customer;
 import by.it.skorobogatyi.jd02_03.entity.Good;
 import by.it.skorobogatyi.jd02_03.entity.Store;
+import by.it.skorobogatyi.jd02_03.utils.Printer;
 import by.it.skorobogatyi.jd02_03.utils.RandomData;
 import by.it.skorobogatyi.jd02_03.utils.Sleeper;
 
@@ -59,43 +60,24 @@ public class CashierRunner implements Runnable {
     private void serviceCustomer() {
 
         blueColourPrint(cashier + " started service " + customer);
+
         int timeForCashier = RandomData.getRandomNumber(2000, 5000);
         Sleeper.sleep(timeForCashier);
 
         BigDecimal checkForCustomer = BigDecimal.valueOf(0);
         ArrayList<Good> goodListOfCustomer = customer.getShoppingCart().goodList;
-        StringBuilder goodsForPrint = new StringBuilder();
-
-        checkForCustomer = countAndPrintCheckForCustomer(goodsForPrint, checkForCustomer, goodListOfCustomer);
+        checkForCustomer = Printer.printCheck(goodListOfCustomer, customer);
+        store.setOverallMoneyAmount(store.getOverallMoneyAmount().add(checkForCustomer));
 
         cashier.setMoney(cashier.getMoney().add(checkForCustomer));
 
         blueColourPrint(cashier + " finished service " + customer);
 
+        //noinspection SynchronizeOnNonFinalField
         synchronized (customer) {
             customer.setWaiting(false);
             customer.notify();
         }
-    }
-
-    private BigDecimal countAndPrintCheckForCustomer(StringBuilder goodsForPrint, BigDecimal checkForCustomer, ArrayList<Good> goodListOfCustomer) {
-
-        goodsForPrint.append("_".repeat(50)).append("\n");
-        goodsForPrint.append("| Goods in cart for ").append(customer).append(":\n");
-
-        for (Good good : goodListOfCustomer) {
-            String goodName = good.name;
-            BigDecimal goodPrice = good.price;
-            String goodElement = goodName + " for price " + goodPrice + "\n";
-            goodsForPrint.append("| ").append(goodElement);
-            checkForCustomer = checkForCustomer.add(goodPrice);
-        }
-
-        goodsForPrint.append("| Check for ").append(customer).append(": ").append(checkForCustomer).append("\n");
-        goodsForPrint.append("-".repeat(50)).append("\n");
-        blueColourPrint(String.valueOf(goodsForPrint));
-
-        return checkForCustomer;
     }
 
     private void finishWorkForCashier() {

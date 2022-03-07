@@ -5,6 +5,7 @@ import by.it.skorobogatyi.jd02_03.entity.Good;
 import by.it.skorobogatyi.jd02_03.entity.ShopQueue;
 import by.it.skorobogatyi.jd02_03.entity.Store;
 import by.it.skorobogatyi.jd02_03.exceptions.StoreException;
+import by.it.skorobogatyi.jd02_03.utils.Printer;
 import by.it.skorobogatyi.jd02_03.utils.RandomData;
 import by.it.skorobogatyi.jd02_03.utils.Sleeper;
 
@@ -55,7 +56,7 @@ public class CustomerRunner extends Thread implements CustomerAction, ShoppingCa
     @Override
     public void enteredStore() {
 
-        System.out.println(customer + " entered the store");
+        Printer.print(customer + " entered the store");
     }
 
     @Override
@@ -63,7 +64,7 @@ public class CustomerRunner extends Thread implements CustomerAction, ShoppingCa
         try {
             semaphore.acquire();
             customer.setShoppingCart();
-            System.out.println(customer + " took a cart");
+            Printer.print(customer + " took a cart");
         } catch (InterruptedException e) {
             throw new StoreException(e);
         } finally {
@@ -74,7 +75,7 @@ public class CustomerRunner extends Thread implements CustomerAction, ShoppingCa
     @Override
     public Good chooseGood() {
 
-        System.out.println(customer + " started to choose something");
+        Printer.print(customer + " started to choose something");
 
         int timeForGoodChoice = RandomData.getRandomTimeForGoodsChoosing(this);
         Sleeper.sleep(timeForGoodChoice);
@@ -100,7 +101,7 @@ public class CustomerRunner extends Thread implements CustomerAction, ShoppingCa
     @Override
     public void goToQueue() {
 
-        System.out.println(customer + " waiting in queue");
+        Printer.print(customer + " waiting in queue");
 
         synchronized (customer) {
             ShopQueue shopQueue = store.getQueue();
@@ -117,7 +118,7 @@ public class CustomerRunner extends Thread implements CustomerAction, ShoppingCa
             }
         }
 
-        System.out.println(customer + " left queue");
+        Printer.print(customer + " left queue");
     }
 
     @Override
@@ -125,13 +126,13 @@ public class CustomerRunner extends Thread implements CustomerAction, ShoppingCa
 
         ArrayList<Good> goodList = customer.getShoppingCart().goodList;
         goodList.add(good);
-        System.out.println(customer + " choose " + good);
+        Printer.print(customer + " choose " + good);
         return goodList.size();
     }
 
     @Override
     public void goOut() {
-        System.out.println(customer + " goes home");
+        Printer.print(customer + " goes home");
         store.getManager().customerOut();
     }
 }

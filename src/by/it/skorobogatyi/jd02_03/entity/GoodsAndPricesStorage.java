@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class GoodsAndPricesStorage {
 
     public Map<String, BigDecimal> priceList;
@@ -12,7 +13,7 @@ public class GoodsAndPricesStorage {
         priceList = new HashMap<>();
         priceList.put("Orange", BigDecimal.valueOf(5));
         priceList.put("Beer", BigDecimal.valueOf(2));
-        priceList.put("Cognac \"Chars'o'Nil\"", BigDecimal.valueOf(2.5));
+        priceList.put("\"Chars'o'Nil\"", BigDecimal.valueOf(2.5));
         priceList.put("Apple", BigDecimal.valueOf(1.5));
         priceList.put("Cake", BigDecimal.valueOf(10));
         priceList.put("Cheese", BigDecimal.valueOf(16));
