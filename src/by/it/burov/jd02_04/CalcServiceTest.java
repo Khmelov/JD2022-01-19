@@ -51,17 +51,17 @@ public class CalcServiceTest {
 
     @Test
     public void calcScalarLevelB() throws CalcException {
-        Vector var1 = (Vector) calcService.calc("C=B+(A*2)");
-        Vector var2 = (Vector) calcService.calc("D=((C-0.15)-20)/(7-5)");
-        Vector var3 = (Vector) calcService.calc("E={2,3}*(D/2)");
-        double[] expected1 = {40.15};
-        double[] actual1 = var1.getValue();
-        double[] expected2 = {10};
-        double[] actual2 = var2.getValue();
+        Scalar var1 = (Scalar) calcService.calc("C=B+(A*2)");
+        Scalar var2 = (Scalar) calcService.calc("D=((C-0.15)-20)/(7-5)");
+        Vector var3 = (Vector) calcService.calc("E={2,3}*(10/2)");
+        double expected1 = 40.15;
+        double actual1 = var1.getValue();
+        double expected2 = 10;
+        double actual2 = var2.getValue();
         double[] expected3 = {10,15};
         double[] actual3 = var3.getValue();
-        assertArrayEquals(expected1, actual1, 1e-10);
-        assertArrayEquals(expected2, actual2, 1e-10);
+        assertEquals(expected1, actual1, 1e-10);
+        assertEquals(expected2, actual2, 1e-10);
         assertArrayEquals(expected3,actual3,1e-10);
     }
 }

@@ -5,7 +5,10 @@ import by.it.burov.calculator.model.Var;
 import by.it.burov.calculator.repositories.VarRepository;
 import by.it.burov.calculator.utils.Patterns;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,6 +29,14 @@ public class CalcService {
 
     public Var calc(String expression) throws CalcException {
         expression = expression.replaceAll(Patterns.SPACES, "");
+        if (expression.contains("(")) {
+            expression = bracketControl(expression);
+        }
+        String result = getVar(expression);
+        return repository.createVar(result);
+    }
+
+    private String getVar(String expression) throws CalcException {
         List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         List<String> operations = new ArrayList<>();
         Matcher operationFinder = Pattern.compile(Patterns.OPERATION).matcher(expression);
@@ -40,7 +51,52 @@ public class CalcService {
             Var result = calcOneOperation(left, operation, right);
             operands.add(index, result.toString());
         }
-        return repository.createVar(operands.get(0));
+        return operands.get(0);
+    }
+
+    private String bracketControl(String expression) throws CalcException {
+        String checkedExpression = expression;
+        String expressionWithoutBrackets = null;
+        while (checkedExpression.contains("(")) {
+            int bracketCounter = 0;
+            int openBracketPosition = checkedExpression.indexOf('(');
+            int closeBracketPosition = 0;
+            for (int i = openBracketPosition; i < checkedExpression.length(); i++) {
+                if (checkedExpression.charAt(i) == '(') {
+                    bracketCounter++;
+                    openBracketPosition = i;
+                }
+                if (checkedExpression.charAt(i) == ')') {
+                    bracketCounter--;
+                    closeBracketPosition = i;
+
+                    if (bracketCounter > 0) {
+                        String subExpression = checkedExpression.substring(openBracketPosition + 1, closeBracketPosition);
+                        checkedExpression = checkedExpression.replace("(" + subExpression + ")", getVar(subExpression));
+                        if (checkedExpression.contains("(")) {
+                            expressionWithoutBrackets = bracketControl(checkedExpression);
+                            break;
+                        }
+                    }
+                }
+
+                if (bracketCounter == 0) {
+                    break;
+                }
+            }
+            if (expressionWithoutBrackets != null) {
+                return expressionWithoutBrackets;
+            }
+
+            String subExpression = checkedExpression.substring(openBracketPosition + 1, closeBracketPosition);
+            if (subExpression.contains("(")) {
+                bracketControl(subExpression);
+            } else {
+                expressionWithoutBrackets = checkedExpression.replace("(" + subExpression + ")", getVar(subExpression));
+                return expressionWithoutBrackets;
+            }
+        }
+        return expressionWithoutBrackets;
     }
 
     private Var calcOneOperation(String leftStr, String operation, String rightStr) throws CalcException {
@@ -78,25 +134,4 @@ public class CalcService {
         }
         return index;
     }
-
-    public static String bracketControl(String s) {
-        String current = "";
-        Stack<Integer> numbers = new Stack<Integer>();
-        Stack<Character> op = new Stack<Character>();
-        //((C-0.15)-20)/(7-5)
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (c == '(') {
-                op.push(c);
-            } else if (c == ')') {
-                //while ()
-                //if (!stack.isEmpty() || stack.pop() == '(') {
-                 //   end = i - 1;
-                  //  return true;
-                }
-            }
-
-        return current;
-    }
 }
-
