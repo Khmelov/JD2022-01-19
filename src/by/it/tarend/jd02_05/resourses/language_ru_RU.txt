@@ -3,3 +3,4 @@ messages.question=Как дела?
 user.info=Меня зовут
 user.firstname=Максим
 user.lastname=Тарендь
+messages.date=Дата

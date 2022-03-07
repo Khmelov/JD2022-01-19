@@ -17,7 +17,7 @@ public class OldDate {
         Date date1 = new Date(millis);
         System.out.println(date1);
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MMMM.yyyy HH.mm.ss");
         String formattedDate = simpleDateFormat.format(date1);
         System.out.println(formattedDate);
     }
