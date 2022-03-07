@@ -2,12 +2,14 @@ package by.it.katsal.jd02_01.entity;
 
 public class Pensioner extends Customer {
 
+
     private final String name;
     private ShoppingCart shoppingCart;
 
     public Pensioner(int number) {
         super(number);
         this.name = "Pensioner " + number;
+
     }
 
     @Override
@@ -25,3 +27,5 @@ public class Pensioner extends Customer {
         return name;
     }
 }
+
+

@@ -5,9 +5,11 @@ public class Student extends Customer {
     private final String name;
     private ShoppingCart shoppingCart;
 
+
     public Student(int number) {
         super(number);
         this.name = "Student " + number;
+
     }
 
     @Override
@@ -19,6 +21,7 @@ public class Student extends Customer {
     public void setShoppingCart() {
         this.shoppingCart = new ShoppingCart();
     }
+
 
     @Override
     public String toString() {

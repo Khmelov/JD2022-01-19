@@ -13,6 +13,7 @@ import java.util.List;
 
 public class Store extends Thread {
 
+
     public final String name;
 
     public Store(String name) {
@@ -23,6 +24,7 @@ public class Store extends Thread {
 
     @Override
     public void run() {
+
         System.out.println("Store" + name + "opened");
         int customerNumber = 0;
         List<Thread> threads = new ArrayList<>();
@@ -31,6 +33,7 @@ public class Store extends Thread {
             customerNumber = attendance(customerNumber, threads, time, count);
             Sleeper.sleep(1000);
         }
+
         for (Thread thread : threads) {
 
             try {
@@ -39,6 +42,7 @@ public class Store extends Thread {
                 throw new StoreException(e);
             }
         }
+
         System.out.println("Store " + name + " closed");
     }
 
@@ -48,15 +52,19 @@ public class Store extends Thread {
                 if (customerNumber <= time + 10) {
                     createCustomer(++customerNumber, threads);
                 }
-            } else if (time <= 60) {
+
+            }
+            else if (time <= 60) {
                 if (customerNumber <= 40 + (30 - time)) {
                     createCustomer(++customerNumber, threads);
                 }
-            } else if (time <= 90) {
+            }
+            else if (time <= 90) {
                 if (customerNumber <= time - 60 + 10) {
                     createCustomer(++customerNumber, threads);
                 }
-            } else {
+            }
+            else {
                 if (customerNumber <= 40 + (30 - time + 60)) {
                     createCustomer(++customerNumber, threads);
                 }
@@ -84,3 +92,5 @@ public class Store extends Thread {
         return customerWorker;
     }
 }
+
+

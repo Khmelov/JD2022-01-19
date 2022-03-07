@@ -15,6 +15,7 @@ public class PensionerWorker extends CustomerWorker {
     public PensionerWorker(Store store, Customer customer) {
         super(store, customer);
         this.customer = customer;
+
     }
 
 
@@ -23,18 +24,22 @@ public class PensionerWorker extends CustomerWorker {
         super.run();
     }
 
+
     @Override
     public void enteredStore() {
         super.enteredStore();
     }
+
 
     @Override
     public void takeCart() {
         super.takeCart();
     }
 
+
     @Override
     public Good chooseGood() {
+
         System.out.println(customer + " started to choose goods");
         double timeout = (RandomData.get(500, 2000) * 1.5);
         Sleeper.sleep(timeout);
@@ -56,3 +61,5 @@ public class PensionerWorker extends CustomerWorker {
         return super.putToCart(good);
     }
 }
+
+

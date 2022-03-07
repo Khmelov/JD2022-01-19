@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class PriceListRepo {
 
+
     public static Map<String, BigDecimal> catalog = new HashMap<>();
 
     public static void fillCatalog(){
@@ -21,3 +22,5 @@ public class PriceListRepo {
         catalog.put("Water",BigDecimal.valueOf(1.5));
     }
 }
+
+

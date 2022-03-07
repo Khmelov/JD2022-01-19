@@ -7,6 +7,7 @@ import by.it.katsal.jd02_01.utils.RandomData;
 public class StudentWorker extends CustomerWorker {
     private final Customer customer;
 
+
     public StudentWorker(Store store, Customer customer) {
         super(store, customer);
         this.customer = customer;
@@ -14,6 +15,7 @@ public class StudentWorker extends CustomerWorker {
 
     @Override
     public void run() {
+
         enteredStore();
         takeCart();
         int fillTheCart = RandomData.get(2);
@@ -23,7 +25,8 @@ public class StudentWorker extends CustomerWorker {
                 putToCart(good);
                 System.out.println(customer + " has put to the cart " + good);
             }
-        } else {
+        }
+        else {
             System.out.println(customer + " has not enough money today");
         }
         goOut();
@@ -34,10 +37,12 @@ public class StudentWorker extends CustomerWorker {
         super.enteredStore();
     }
 
+
     @Override
     public void takeCart() {
         super.takeCart();
     }
+
 
     @Override
     public Good chooseGood() {
@@ -54,3 +59,5 @@ public class StudentWorker extends CustomerWorker {
         return super.putToCart(good);
     }
 }
+
+

@@ -3,7 +3,9 @@ package by.it.katsal.jd02_01.utils;
 import java.util.Random;
 
 public class RandomData {
+
     public RandomData() {
+
     }
 
     private static final Random random = new Random();
@@ -16,3 +18,5 @@ public class RandomData {
         return get(0,max);
     }
 }
+
+

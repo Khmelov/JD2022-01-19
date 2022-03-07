@@ -4,13 +4,17 @@ import java.math.BigDecimal;
 
 public class Good {
 
+
+
     public final String name;
     public final BigDecimal price;
 
     public Good(String name, BigDecimal price) {
+
         this.name = name;
         this.price = price;
     }
+
 
     public Good() {
         this("noname",BigDecimal.valueOf(0));
@@ -22,3 +26,5 @@ public class Good {
         return name + " (" + price+" BYN)";
     }
 }
+
+

@@ -14,13 +14,16 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
     private  final Customer customer;
     private  final Store store;
 
+
     public CustomerWorker( Store store, Customer customer) {
         this.customer = customer;
         this.store = store;
         this.setName("Worker for "+ customer.toString()+ " ");
+
     }
 
     @Override
+
     public void run() {
         enteredStore();
         takeCart();
@@ -34,6 +37,7 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
     }
 
     @Override
+
     public void enteredStore() {
         System.out.println(customer + " entered to "+ store.name);
     }
@@ -58,6 +62,7 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
         return good;
     }
 
+
     @Override
     public void goOut() {
         System.out.println(customer + " go out");
@@ -70,3 +75,5 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
         return goods.size();
     }
 }
+
+

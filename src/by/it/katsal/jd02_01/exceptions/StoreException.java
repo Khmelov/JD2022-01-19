@@ -1,6 +1,8 @@
 package by.it.katsal.jd02_01.exceptions;
 
 public class StoreException extends RuntimeException{
+
+
     public StoreException() {
         super();
     }
@@ -19,3 +21,7 @@ public class StoreException extends RuntimeException{
 
 
 }
+
+
+
+
