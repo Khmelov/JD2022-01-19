@@ -5,7 +5,7 @@ import java.util.Random;
 public class RandomData {
 
     private RandomData() {
-//в утилитарной классе нужен пустой приватный конструктор, чтоб никто не мог его создать , объект
+//в утилитарном классе нужен пустой приватный конструктор, чтоб никто не мог его создать , объект
     }
 
     private static final Random random = new Random();

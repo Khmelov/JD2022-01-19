@@ -11,11 +11,9 @@ import java.util.List;
 
 public class Store extends Thread {
 
-    public final String name;
-    public Store(String name){
-        this.name = name;
-        PriceListRepo.fillingListOfPruducts();
 
+    public Store(){
+        PriceListRepo.fillingListOfPruducts();
     }
 
     @Override

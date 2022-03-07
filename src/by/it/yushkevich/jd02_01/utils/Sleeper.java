@@ -7,11 +7,11 @@ public class Sleeper {
     public Sleeper() {
     }
 
-    public static void sleep(int milis){
+    public static void sleep(int millis){
         try {
-            Thread.sleep(milis/Constants.K_SPEED);
+            Thread.sleep(millis/Constants.K_SPEED);
         } catch (InterruptedException e) {
-            throw new StoreException("SOS", e);
+            throw new StoreException("OMG", e);
         }
 
     }
