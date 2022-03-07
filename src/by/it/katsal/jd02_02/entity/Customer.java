@@ -6,13 +6,11 @@ public class Customer {
 
     private boolean waiting;
 
+
     public Customer(int number) {
-        name = "Customer №" + number;
+        name = "Customer № " + number;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public boolean isWaiting() {
         return waiting;
@@ -22,8 +20,8 @@ public class Customer {
         this.waiting = waiting;
     }
 
-    public Object getMonitor(){
-        return this;
+    public Object getMonitor() {
+        return  this;
     }
 
     @Override
@@ -31,3 +29,5 @@ public class Customer {
         return name;
     }
 }
+
+
