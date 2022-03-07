@@ -1,0 +1,14 @@
+message.one=ПАМЫЛКА:
+message.two=ПАМЫЛКА: дзяленне на нуль
+message.addition=Аперацыя складання
+message.subtraction=Аперацыя аднімання
+message.multiplication=Аперацыя множання
+message.division=Аперацыя дзялення
+message.abstr=абстрактная зменная
+message.impossible=немагчыма
+message.nf=НЕ ЗНОЙДЗЕНА
+message.io=НЕКАРЭКТНАЯ АПЕРАЦЫЯ
+message.ios=НЯПРАВІЛЬНАЯ АПЕРАЦЫЯ З СІМВАЛАМ
+message.end=канец
+message.start=Прыкладанне стартавала
+message.stop=Прыкладанне фінішавала
