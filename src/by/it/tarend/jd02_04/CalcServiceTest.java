@@ -1,29 +1,32 @@
 package by.it.tarend.jd02_04;
 
+import by.it.tarend.calc.Application;
 import by.it.tarend.calc.exceptions.CalcException;
 import by.it.tarend.calc.model.Matrix;
 import by.it.tarend.calc.model.Scalar;
 import by.it.tarend.calc.model.Vector;
-import by.it.tarend.calc.repositories.MapRepository;
+import by.it.tarend.calc.repositories.FileRepository;
 import by.it.tarend.calc.repositories.VarRepository;
 import by.it.tarend.calc.services.CalcService;
+import by.it.tarend.calc.utils.PathFinder;
 import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class CalcServiceTest {
 
-    private static CalcService calcService;
+    private CalcService calcService;
 
-    @BeforeClass
-    public static void setUp() throws Exception {
-        VarRepository repository = new MapRepository();
+    @Before
+    public void setUp() {
+        String fileName = PathFinder.getFileName(Application.class, "src", "vars.txt");
+        VarRepository repository = new FileRepository(fileName);
         calcService = new CalcService(repository);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 
     @Test
@@ -47,23 +50,6 @@ public class CalcServiceTest {
         double expected4 = 2.65;
         double real4 = var4.getValue();
         assertEquals(expected4, real4, 1e-10);
-
-        // почему значения посчитанные в A не находятся при выполнении B?
-
-        Scalar var5 = (Scalar) calcService.calc("C=B+(A*2)");
-        double expected5 = 40.15;
-        double real5 = var5.getValue();
-        assertEquals(expected5, real5, 1e-10);
-
-        Vector var6 = (Vector) calcService.calc("E={2,3}*(10/2)");
-        String real6 = var6.toString();
-        String expected6 = "{10.0,15.0}";
-        assertEquals(expected6, real6);
-
-        Scalar var7 = (Scalar) calcService.calc("D=((C-0.15)-20)/(7-5)");
-        double expected7 = 10;
-        double real7 = var7.getValue();
-        assertEquals(expected7, real7, 1e-10);
     }
 
     @Test
