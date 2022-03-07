@@ -8,7 +8,6 @@ import by.it.tarend.calc.repositories.MapRepository;
 import by.it.tarend.calc.repositories.VarRepository;
 import by.it.tarend.calc.services.CalcService;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -17,8 +16,8 @@ public class CalcServiceTest {
 
     private static CalcService calcService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() throws Exception {
         VarRepository repository = new MapRepository();
         calcService = new CalcService(repository);
     }
@@ -61,6 +60,10 @@ public class CalcServiceTest {
         String expected6 = "{10.0,15.0}";
         assertEquals(expected6, real6);
 
+        Scalar var7 = (Scalar) calcService.calc("D=((C-0.15)-20)/(7-5)");
+        double expected7 = 10;
+        double real7 = var7.getValue();
+        assertEquals(expected7, real7, 1e-10);
     }
 
     @Test
@@ -70,7 +73,7 @@ public class CalcServiceTest {
         double real1 = var1.getValue();
         assertEquals(expected1, real1, 1e-10);
 
-        Scalar var2 = (Scalar) calcService.calc("D=((C-0.15)-20)/(7-5)"); // deadloop =(
+        Scalar var2 = (Scalar) calcService.calc("D=((C-0.15)-20)/(7-5)");
         double expected2 = 10;
         double real2 = var2.getValue();
         assertEquals(expected2, real2, 1e-10);
