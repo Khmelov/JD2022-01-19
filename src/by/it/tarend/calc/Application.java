@@ -3,7 +3,7 @@ package by.it.tarend.calc;
 import by.it.tarend.calc.controllers.MainController;
 import by.it.tarend.calc.exceptions.ApplicationException;
 import by.it.tarend.calc.model.Var;
-import by.it.tarend.calc.services.CalcService;
+import by.it.tarend.calc.view.Logger;
 import by.it.tarend.calc.view.Printer;
 
 import java.util.Scanner;
@@ -12,15 +12,14 @@ public class Application {
 
     public static final String END = "end";
     private final Printer printer;
-    private final CalcService calcService;
-    private final Reader reader;
     private final MainController controller;
+    private final Logger logger;
 
-    public Application(Printer printer, CalcService calcService, Reader reader, MainController controller) {
+
+    public Application(Printer printer, MainController controller, Logger logger) {
         this.printer = printer;
-        this.calcService = calcService;
-        this.reader = reader;
         this.controller = controller;
+        this.logger = logger;
     }
 
 
@@ -33,8 +32,10 @@ public class Application {
                 try {
                     Var result = controller.process(line);
                     printer.print(result);
+                    logger.info(result.toString());
                 } catch (ApplicationException e) {
                     printer.printError(e);
+                    logger.error(e.getMessage());
                 }
             } else {
                 System.out.println("App finished");

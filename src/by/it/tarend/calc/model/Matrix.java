@@ -149,7 +149,7 @@ public class Matrix extends Var {
             outPut.append("{");
             for (int j = 0; j < value[i].length; j++) {
                 outPut.append(delimiter).append(value[i][j]);
-                delimiter = ", ";
+                delimiter = ",";
             }
             if (i == value.length - 1) {
                 delimiter = "";

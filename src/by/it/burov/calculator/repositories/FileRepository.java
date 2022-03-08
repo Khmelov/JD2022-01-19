@@ -58,11 +58,12 @@ public class FileRepository implements VarRepository {
             throw new ApplicationException(e);
         }
 
-        return null;
+        return value;
     }
 
     @Override
-    public Var createVar(String varValueForName) {
+    public Var
+    createVar(String varValueForName) {
         if (varValueForName.matches(Patterns.SCALAR)) {
             return new Scalar(varValueForName);
         } else if (varValueForName.matches(Patterns.VECTOR)) {

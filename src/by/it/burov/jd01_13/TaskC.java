@@ -34,5 +34,4 @@ public class TaskC {
             }
         }
 }
-//"1 2 err1 3 4 err2 err3 err4 err5 5.0 err6"
 

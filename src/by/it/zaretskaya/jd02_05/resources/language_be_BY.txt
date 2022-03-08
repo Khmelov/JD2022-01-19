@@ -1,0 +1,5 @@
+messages.welcome=Витаю!
+messages.question=Як справы?
+user.info=Мае имя
+user.firstname=Галина
+user.lastname=Зарэцкая

@@ -41,6 +41,5 @@ public class Store extends Thread {
         }
         System.out.println("Store closed");
     }
-
 }
 

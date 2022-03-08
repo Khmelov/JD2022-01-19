@@ -32,7 +32,6 @@ public class TaskA {
                                 new FileOutputStream(filename)))) {
             for (int i = 0; i < 20; i++) {
                 int value = ThreadLocalRandom.current().nextInt(2000);
-
                 dataOutputStream.writeInt(value);
             }
         } catch (IOException e) {
@@ -62,7 +61,7 @@ public class TaskA {
             System.out.printf("%d ", intValue);
 
         }
-        System.out.printf(Locale.ENGLISH, "%navr=%f%n", sum / intValues.size());
+        System.out.printf(Locale.ENGLISH, "%navg=%f%n", sum / intValues.size());
     }
     private static void outputToTxt(List<Integer> intValues, String filenameTxt) {
         try (
@@ -74,13 +73,10 @@ public class TaskA {
                 printWriter.printf("%d", intValue);
 
             }
-            printWriter.printf(Locale.ENGLISH, "%navr=%f%n", sum2 / intValues.size());
+            printWriter.printf(Locale.ENGLISH, "%navg=%f%n", sum2 / intValues.size());
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException("IO error", e);
         }
     }
-
-
-
 }

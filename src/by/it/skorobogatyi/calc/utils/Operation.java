@@ -1,5 +1,6 @@
 package by.it.skorobogatyi.calc.utils;
 
+import by.it.skorobogatyi.calc.exceptions.CalcException;
 import by.it.skorobogatyi.calc.variables.AbstractVar;
 
 public interface Operation {
