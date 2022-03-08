@@ -7,10 +7,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class NewDate {
-
-
     public static void main(String[] args) {
-
         LocalDateTime localTime = LocalDateTime.now();
         System.out.println(localTime);
 
@@ -25,6 +22,4 @@ public class NewDate {
         String str = fullTime.format(dateTimeFormatter);
         System.out.println(str);
     }
-
 }
-

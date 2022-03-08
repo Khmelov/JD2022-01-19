@@ -5,10 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class OldDate {
-
     public static void main(String[] args) {
-
-
         Date date = new Date();
         System.out.println(date);
         Calendar calendar = Calendar.getInstance();
@@ -22,8 +19,5 @@ public class OldDate {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
         String str = simpleDateFormat.format(date1);
         System.out.println(str);
-
     }
 }
-
-

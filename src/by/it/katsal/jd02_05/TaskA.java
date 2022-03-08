@@ -6,15 +6,12 @@ import by.it.katsal.jd02_05.contants.User;
 import java.util.Locale;
 
 public class TaskA {
-
     public static void main(String[] args) {
-
         ResourceManager lang = ResourceManager.INSTANCE;
         if (args.length == 2) {
             Locale locale = new Locale(args[0], args[1]);
             lang.set(locale);
         }
-
         System.out.printf("%s\n%s\n%s %s %s\n",
                 lang.get(Messages.WELCOME),
                 lang.get(Messages.QUESTION),
@@ -22,8 +19,5 @@ public class TaskA {
                 lang.get(User.FIRST_NAME),
                 lang.get(User.LAST_NAME)
         );
-
     }
 }
-
-
