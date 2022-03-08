@@ -1,0 +1,13 @@
+error.error = ОШИБКА:
+error.incorrectOperation = Неверная операция:
+error.incorrectExpression = Неверное выражение
+error.unknownVariable = Неизвестная переменная
+
+message.subtraction = Операция вычитания невозможна
+message.addition = Операция сложения невозможна
+message.multiplication = Операция умножения невозможна
+message.division = Операция деления невозможна
+message.applicationStart = Старт приложения
+message.applicationFinish = Конец приложения
+
+
