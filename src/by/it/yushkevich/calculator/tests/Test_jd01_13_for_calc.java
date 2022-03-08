@@ -1,4 +1,4 @@
-package by.it.yushkevich.calculator;
+package by.it.yushkevich.calculator.tests;
 
 
 import by.it.HomeWork;
