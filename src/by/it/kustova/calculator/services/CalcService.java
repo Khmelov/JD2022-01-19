@@ -31,20 +31,16 @@ public class CalcService {
 
     public Var calc(String expression) throws CalcException {
         expression = expression.replaceAll(Patterns.SPACES, "");
-        if (expression.contains("(")) {
-            expression = calcWithBrackets(expression);
-        }
-        String result = getVar(expression);
-        return repository.create(result);
-    }
-
-    private String getVar(String expression) throws CalcException {
+        // A=2*3+5
+        // A 2 3 5
         List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
+        // = * +
         List<String> operations = new ArrayList<>();
         Matcher operationFinder = Pattern.compile(Patterns.OPERATION).matcher(expression);
         while (operationFinder.find()) {
             operations.add(operationFinder.group());
         }
+
         while (!operations.isEmpty()) {
             int index = getIndexOperation(operations);
             String left = operands.remove(index);
@@ -53,9 +49,8 @@ public class CalcService {
             Var result = calcOneOperation(left, operation, right);
             operands.add(index, result.toString());
         }
-        return operands.get(0);
+        return repository.create(operands.get(0));
     }
-
 
     private Var calcOneOperation(String leftStr, String operation, String rightStr)
             throws CalcException {
@@ -84,50 +79,12 @@ public class CalcService {
         int index = -1;
         int currentPriority = -1;
         for (int i = 0; i < operations.size(); i++) {
-            String operation = operations.get(i);
-            if (currentPriority < priorityMap.get(operation)) {
-                currentPriority = priorityMap.get(operation);
+            String op = operations.get(i);
+            if (currentPriority < priorityMap.get(op)) {
+                currentPriority = priorityMap.get(op);
                 index = i;
             }
         }
         return index;
-    }
-
-    private String calcWithBrackets(String expression) throws CalcException {
-        String inExpression = expression;
-        String withoutBrackets = null;
-        while (inExpression.contains("(")) {
-            int bracketsCount = 0;
-            int bracketsOpen = inExpression.indexOf('(');
-            int bracketsClose = 0;
-            for (int i = bracketsOpen; i < inExpression.length(); i++) {
-                if (inExpression.charAt(i) == '(') {
-                    bracketsCount++;
-                    bracketsOpen = i;
-                }
-                if (inExpression.charAt(i) == ')') {
-                    bracketsCount--;
-                    bracketsClose = i;
-
-                    if (bracketsCount > 0 || (bracketsCount == 0 && inExpression.contains("("))) {
-                        String subExpression = inExpression.substring(bracketsOpen + 1, bracketsClose);
-                        inExpression = inExpression.replace("(" + subExpression + ")", (CharSequence) calc(subExpression));
-                        if (inExpression.contains("(")) {
-                            withoutBrackets = calcWithBrackets(inExpression);
-                            break;
-                        } else {
-                            withoutBrackets = inExpression;
-                            return withoutBrackets;
-                        }
-                    }
-                }
-
-            }
-            if (withoutBrackets != null) {
-                return withoutBrackets;
-            }
-        }
-
-        return withoutBrackets;
     }
 }

@@ -14,7 +14,7 @@ public class MainController {
 
     public Var process(String request) {
         try {
-            return (Var) calcService.calc(request);
+            return calcService.calc(request);
         } catch (CalcException e) {
             throw new ApplacitionException(e);
         }

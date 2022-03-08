@@ -1,6 +1,6 @@
 package by.it.kustova.jd02_04;
 
-/*import by.it.kustova.calculator.exceptions.CalcException;
+import by.it.kustova.calculator.exceptions.CalcException;
 import by.it.kustova.calculator.model.Scalar;
 import by.it.kustova.calculator.model.Vector;
 import by.it.kustova.calculator.repositories.MapRepository;
@@ -66,4 +66,4 @@ public class CalcServiceTest {
 
 
     }
-}*/
+}

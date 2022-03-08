@@ -2,10 +2,6 @@ package by.it.kustova.calculator.model;
 
 import by.it.kustova.calculator.exceptions.CalcException;
 
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Vector extends Var {
 
     public Vector(double[] value) {
@@ -14,24 +10,12 @@ public class Vector extends Var {
 
     private final double[] value;
 
-    public double[] getValue() {
-        return value.clone();
+    public Vector(String value) {
+        this.value = new double[]{};
     }
 
-    public Vector(String stringValue) {
-        Pattern pattern = Pattern.compile("[\\d.?\\d]+");
-        Matcher matcher = pattern.matcher(stringValue);
-        String[] stringArray = {};
-        while (matcher.find()) {
-            String digit = matcher.group();
-            stringArray = Arrays.copyOf(stringArray, stringArray.length + 1);
-            stringArray[stringArray.length - 1] = digit;
-        }
-        double[] doubleArray = new double[stringArray.length];
-        for (int i = 0; i < stringArray.length; i++) {
-            doubleArray[i] = Double.parseDouble(stringArray[i]);
-        }
-        this.value = doubleArray;
+    public double[] getValue() {
+        return value.clone();
     }
 
 
@@ -61,7 +45,7 @@ public class Vector extends Var {
         String delimiter = "";
         for (double element : value) {
             out.append(delimiter).append(element);
-            delimiter = ",";
+            delimiter = ", ";
         }
         out.append("}");
         return out.toString();
