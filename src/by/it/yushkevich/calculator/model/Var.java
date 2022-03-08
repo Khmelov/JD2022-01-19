@@ -1,7 +1,9 @@
-package by.it.yushkevich.calculator;
+package by.it.yushkevich.calculator.model;
+
+import by.it.yushkevich.calculator.exceptions.CalcException;
 
 //TODO do this task one more time by yourself
-abstract class Var implements Operation {
+public class Var implements Operation {
 
 
     @Override

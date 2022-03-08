@@ -1,8 +1,10 @@
-package by.it.yushkevich.calculator;
+package by.it.yushkevich.calculator.model;
 
-class Matrix extends Var {
+import by.it.yushkevich.calculator.exceptions.CalcException;
 
-    private double[][] value;
+public class Matrix extends Var {
+
+    private final double[][] value;
 
 
     public Matrix(double[][] value) {

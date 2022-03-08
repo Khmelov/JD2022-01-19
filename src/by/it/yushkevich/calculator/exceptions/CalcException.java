@@ -1,4 +1,4 @@
-package by.it.yushkevich.calculator;
+package by.it.yushkevich.calculator.exceptions;
 
 import java.io.Serial;
 

@@ -1,10 +1,12 @@
-package by.it.yushkevich.calculator;
+package by.it.yushkevich.calculator.model;
+
+import by.it.yushkevich.calculator.exceptions.CalcException;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Vector extends Var {
+public class Vector extends Var {
 
     private final double[] value;
 

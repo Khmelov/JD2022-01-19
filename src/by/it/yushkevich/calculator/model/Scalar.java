@@ -1,6 +1,8 @@
-package by.it.yushkevich.calculator;
+package by.it.yushkevich.calculator.model;
 
-class Scalar extends Var {
+import by.it.yushkevich.calculator.exceptions.CalcException;
+
+public class Scalar extends Var {
 
 
     private double value;

@@ -1,4 +1,6 @@
-package by.it.yushkevich.calculator;
+package by.it.yushkevich.calculator.model;
+
+import by.it.yushkevich.calculator.exceptions.CalcException;
 
 interface Operation {
     Var add(Var other) throws CalcException;

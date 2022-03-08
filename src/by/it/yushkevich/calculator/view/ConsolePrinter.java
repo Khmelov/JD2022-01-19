@@ -1,4 +1,6 @@
-package by.it.yushkevich.calculator;
+package by.it.yushkevich.calculator.view;
+
+import by.it.yushkevich.calculator.model.Var;
 
 public class ConsolePrinter implements Printer {
     @Override
