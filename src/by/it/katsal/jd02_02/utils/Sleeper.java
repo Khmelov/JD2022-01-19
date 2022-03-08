@@ -1,8 +1,10 @@
 package by.it.katsal.jd02_02.utils;
 
+
 import by.it.katsal.jd02_02.exceptions.StoreException;
 
 public class Sleeper {
+
 
     private Sleeper() {
     }
@@ -11,7 +13,10 @@ public class Sleeper {
         try {
             Thread.sleep(millis / Constants.K_SPEED);
         } catch (InterruptedException e) {
-            throw new StoreException(e);
+            throw new StoreException("message" +e);
         }
     }
+
 }
+
+
