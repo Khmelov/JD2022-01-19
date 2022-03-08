@@ -23,7 +23,7 @@ public class Application {
 
         String message = LocalisationManager.INSTANCE.get("message.applicationStart");
         System.out.printf("%s%n", message);
-        Logger.INSTANCE.info(message);
+        Logger.getInstance().info(message);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -41,7 +41,7 @@ public class Application {
             } else {
                 message = LocalisationManager.INSTANCE.get("message.applicationFinish");
                 System.out.printf("%s", message);
-                Logger.INSTANCE.info(message);
+                Logger.getInstance().info(message);
                 break;
             }
         }

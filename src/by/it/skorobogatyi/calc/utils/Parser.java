@@ -116,7 +116,7 @@ public class Parser {
         if (left == null || right == null) {
             String message = String.format("%s" + leftStr + operation + rightStr,
                     LocalisationManager.INSTANCE.get("error.incorrectOperation"));
-            Logger.INSTANCE.error(message);
+            Logger.getInstance().error(message);
             throw new CalcException(message);
         }
 
@@ -132,7 +132,7 @@ public class Parser {
             default:
                 String message = String.format("%s",
                         LocalisationManager.INSTANCE.get("error.incorrectExpression"));
-                Logger.INSTANCE.error(message);
+                Logger.getInstance().error(message);
                 throw new CalcException(message);
         }
     }

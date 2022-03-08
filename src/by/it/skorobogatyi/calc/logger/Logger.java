@@ -4,9 +4,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public enum Logger implements Log {
+public class Logger implements Log {
 
-    INSTANCE;
+    private Logger(){
+    }
+
+    private static class LazyLogger {
+        static final Logger INSTANCE = new Logger();
+    }
+
+    public static Logger getInstance(){
+        return LazyLogger.INSTANCE;
+    }
 
     public static final String ROOT = "src";
     public static final String LOG_TXT = "log.txt";

@@ -44,21 +44,21 @@ public class VarCreator {
         }  else if (varValue.matches(CustomPatterns.COMMAND_CHANGE_LANGUAGE_RU)) {
             LocalisationManager.INSTANCE.set(new Locale("ru", "RU"));
             messageForLogger = "Язык изменён на русский";
-            Logger.INSTANCE.info(messageForLogger);
+            Logger.getInstance().info(messageForLogger);
             System.out.println(messageForLogger);
 
 
         }  else if (varValue.matches(CustomPatterns.COMMAND_CHANGE_LANGUAGE_EN)) {
             LocalisationManager.INSTANCE.set(new Locale("en", "US"));
             messageForLogger = "Changing language to English";
-            Logger.INSTANCE.info(messageForLogger);
+            Logger.getInstance().info(messageForLogger);
             System.out.println(messageForLogger);
 
 
         }  else if (varValue.matches(CustomPatterns.COMMAND_CHANGE_LANGUAGE_BY)) {
             LocalisationManager.INSTANCE.set(new Locale("be", "BY"));
             messageForLogger = "Витаю, сябра, гэта калькулятар с беларускай мовай";
-            Logger.INSTANCE.info(messageForLogger);
+            Logger.getInstance().info(messageForLogger);
             System.out.println(messageForLogger);
 
         }

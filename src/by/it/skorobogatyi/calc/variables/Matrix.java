@@ -96,7 +96,7 @@ public class Matrix extends AbstractVar implements Operation {
         String message = String.format("%s: %s%n",
                 LocalisationManager.INSTANCE.get("message.addition"),
                 submessage);
-        Logger.INSTANCE.error(message);
+        Logger.getInstance().error(message);
         throw new CalcException(message);
     }
 
@@ -108,7 +108,7 @@ public class Matrix extends AbstractVar implements Operation {
             String message = String.format("%s: %s%n",
                     LocalisationManager.INSTANCE.get("message.addition"),
                     submessage);
-            Logger.INSTANCE.error(message);
+            Logger.getInstance().error(message);
             throw new CalcException(message);
         }
 
@@ -118,7 +118,7 @@ public class Matrix extends AbstractVar implements Operation {
                 String message = String.format("%s: %s%n",
                         LocalisationManager.INSTANCE.get("message.addition"),
                         submessage);
-                Logger.INSTANCE.error(message);
+                Logger.getInstance().error(message);
                 throw new CalcException(message);
             }
         }
@@ -161,7 +161,7 @@ public class Matrix extends AbstractVar implements Operation {
         String message = String.format("%s: %s%n",
                 LocalisationManager.INSTANCE.get("message.subtraction"),
                 submessage);
-        Logger.INSTANCE.error(message);
+        Logger.getInstance().error(message);
         throw new CalcException(message);
     }
 
@@ -173,7 +173,7 @@ public class Matrix extends AbstractVar implements Operation {
             String message = String.format("%s: %s%n",
                     LocalisationManager.INSTANCE.get("message.subtraction"),
                     submessage);
-            Logger.INSTANCE.error(message);
+            Logger.getInstance().error(message);
             throw new CalcException(message);
         }
 
@@ -183,7 +183,7 @@ public class Matrix extends AbstractVar implements Operation {
                 String message = String.format("%s: %s%n",
                         LocalisationManager.INSTANCE.get("message.subtraction"),
                         submessage);
-                Logger.INSTANCE.error(message);
+                Logger.getInstance().error(message);
                 throw new CalcException(message);
             }
         }
@@ -226,7 +226,7 @@ public class Matrix extends AbstractVar implements Operation {
             String message = String.format("%s: %s%n",
                     LocalisationManager.INSTANCE.get("message.multiplication"),
                     submessage);
-            Logger.INSTANCE.error(message);
+            Logger.getInstance().error(message);
             throw new CalcException(message);
         }
 
@@ -249,7 +249,7 @@ public class Matrix extends AbstractVar implements Operation {
             String message = String.format("%s: %s%n",
                     LocalisationManager.INSTANCE.get("message.multiplication"),
                     submessage);
-            Logger.INSTANCE.error(message);
+            Logger.getInstance().error(message);
             throw new CalcException(message);
         }
 
@@ -291,7 +291,7 @@ public class Matrix extends AbstractVar implements Operation {
         String message = String.format("%s: %s%n",
                 LocalisationManager.INSTANCE.get("message.division"),
                 submessage);
-        Logger.INSTANCE.error(message);
+        Logger.getInstance().error(message);
         throw new CalcException(message);
     }
 
@@ -301,7 +301,7 @@ public class Matrix extends AbstractVar implements Operation {
         String message = String.format("%s: %s%n",
                 LocalisationManager.INSTANCE.get("message.division"),
                 submessage);
-        Logger.INSTANCE.error(message);
+        Logger.getInstance().error(message);
         throw new CalcException(message);
     }
 
@@ -311,7 +311,7 @@ public class Matrix extends AbstractVar implements Operation {
         String message = String.format("%s: %s%n",
                 LocalisationManager.INSTANCE.get("message.division"),
                 submessage);
-        Logger.INSTANCE.error(message);
+        Logger.getInstance().error(message);
         throw new CalcException(message);
     }
 }

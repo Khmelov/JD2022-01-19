@@ -1,4 +1,4 @@
-package by.it.skorobogatyi.jd02_06.task_a;
+package by.it.skorobogatyi.jd02_06;
 
 public interface Log {
 

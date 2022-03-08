@@ -51,7 +51,7 @@ public abstract class AbstractVar implements Operation {
     @Override
     public String toString() {
         String message = LocalisationManager.INSTANCE.get("error.unknownVariable");
-        Logger.INSTANCE.error(message);
+        Logger.getInstance().error(message);
         return String.format("%s", message);
     }
 }
