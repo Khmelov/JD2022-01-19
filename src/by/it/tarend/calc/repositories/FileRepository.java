@@ -68,6 +68,6 @@ public class FileRepository implements VarRepository{
             return variables.get(varValueOrName);
         }
 
-        throw new ApplicationException(varValueOrName);
+        throw new ApplicationException("Unknown variable " + varValueOrName);
     }
 }

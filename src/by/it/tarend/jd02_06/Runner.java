@@ -9,9 +9,8 @@ public class Runner {
                 public void run() {
                     Logger logger = Logger.getInstance();
                     logger.error(this.getName() + "Wrong");
-                    logger.info(this.getName() + "is OK");
+                    logger.info(this.getName() + " is OK");
                 }
-
             };
             thread.start();
         }
