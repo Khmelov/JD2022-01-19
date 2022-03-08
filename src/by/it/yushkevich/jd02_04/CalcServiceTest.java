@@ -59,13 +59,9 @@ public class CalcServiceTest {
         assertEquals(expected3,actual3,1e-10);
 
 
-//        Scalar var4 = (Scalar) calcService.calc("A=2+2*2");
-//        double expected4 = 6.0;
-//        double actual4 = var4.getValue();
-//        assertEquals(expected4,actual4,1e-10);
-
-
     }
+
+
 
         @Test
     public void calcScalarSign() throws CalcException {
