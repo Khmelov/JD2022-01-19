@@ -34,11 +34,12 @@ public class CalcServiceTest {
     }
     @Test
     public void calcScalarLevelA() throws CalcException {
-        Scalar var = (Scalar)calcService.calc("A=2+2*2");
-        double expected=6;
-        double actual= var.getValue();
-        assertEquals(expected,actual,1e-10);
+        Scalar var = (Scalar) calcService.calc("A=2+5.3");
+        double expected = 7.3;
+        double actual = var.getValue();
+        assertEquals(expected, actual, 1e-10);
     }
+
     @Test
     public void calcScalarSign() throws CalcException {
         Scalar var = (Scalar)calcService.calc("-2.0--2");
