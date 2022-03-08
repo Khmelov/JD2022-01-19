@@ -20,6 +20,7 @@ public class Logger implements Log {
     public static final String ROOT = "src";
     public static final String LOG_TXT = "log.txt";
     public static final String FILENAME = FilenameGetter.getFilename(Logger.class, ROOT, LOG_TXT);
+    private final boolean fullReport = false;
 
 
     private void log(String message) {
@@ -35,12 +36,20 @@ public class Logger implements Log {
 
     @Override
     public void error(String message) {
-        log("ERROR: " + message);
+        if (fullReport) {
+            log("ERROR: " + message);
+        } else {
+            log(message);
+        }
     }
 
     @Override
     public void info(String message) {
-        log("INFO: " + message);
+        if (fullReport) {
+            log("INFO: " + message);
+        } else {
+            log(message);
+        }
 
     }
 }
