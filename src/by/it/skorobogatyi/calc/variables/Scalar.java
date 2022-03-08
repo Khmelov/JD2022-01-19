@@ -1,11 +1,15 @@
 package by.it.skorobogatyi.calc.variables;
 
-import by.it.skorobogatyi.calc.utils.CalcException;
+import by.it.skorobogatyi.calc.exceptions.CalcException;
+import by.it.skorobogatyi.calc.logger.Logger;
+import by.it.skorobogatyi.calc.resources.LocalisationManager;
 import by.it.skorobogatyi.calc.utils.Operation;
 
-class Scalar extends AbstractVar implements Operation {
+public class Scalar extends AbstractVar implements Operation {
 
     private final double value;
+
+
 
     public double getValue() {
         return value;
@@ -109,7 +113,11 @@ class Scalar extends AbstractVar implements Operation {
             return new Scalar(returnValue);
         }
 
-        String message = String.format("Operation division %s / %s impossible%n", other, this);
+        String submessage = String.format("%s / %s", other, this);
+        String message = String.format("%s: %s%n",
+                LocalisationManager.INSTANCE.get("message.division"),
+                submessage);
+        Logger.INSTANCE.error(message);
         throw new CalcException(message);
 
     }
@@ -125,7 +133,11 @@ class Scalar extends AbstractVar implements Operation {
             }
             return new Vector(localValue);
         }
-        String message = String.format("Operation division %s / %s impossible%n", this, other);
+        String submessage = String.format("%s / %s", this, other);
+        String message = String.format("%s: %s%n",
+                LocalisationManager.INSTANCE.get("message.division"),
+                submessage);
+        Logger.INSTANCE.error(message);
         throw new CalcException(message);
     }
 

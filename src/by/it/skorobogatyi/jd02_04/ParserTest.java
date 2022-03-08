@@ -1,6 +1,6 @@
 package by.it.skorobogatyi.jd02_04;
 
-import by.it.skorobogatyi.calc.utils.CalcException;
+import by.it.skorobogatyi.calc.exceptions.CalcException;
 import by.it.skorobogatyi.calc.utils.Parser;
 import by.it.skorobogatyi.calc.utils.VariablesStorage;
 import by.it.skorobogatyi.calc.variables.AbstractVar;

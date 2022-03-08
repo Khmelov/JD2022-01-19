@@ -1,5 +1,8 @@
 package by.it.skorobogatyi.calc.utils;
 
+import by.it.skorobogatyi.calc.exceptions.CalcException;
+import by.it.skorobogatyi.calc.logger.Logger;
+import by.it.skorobogatyi.calc.resources.LocalisationManager;
 import by.it.skorobogatyi.calc.variables.AbstractVar;
 
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ public class Parser {
         }
 
         String result = calcWithoutBraces(expression);
-        return AbstractVar.create(result);
+        return VarCreator.create(result);
     }
 
     private String resolveBraces(String expression) throws CalcException {
@@ -101,17 +104,20 @@ public class Parser {
 
     private AbstractVar calcOneOperation(String leftStr, String operation, String rightStr) throws CalcException {
 
-        AbstractVar right = AbstractVar.create(rightStr);
+        AbstractVar right = VarCreator.create(rightStr);
 
         if (operation.equals("=")) {
             VariablesStorage.variables.put(leftStr, right);
             return right;
         }
 
-        AbstractVar left = AbstractVar.create(leftStr);
+        AbstractVar left = VarCreator.create(leftStr);
 
         if (left == null || right == null) {
-            throw new CalcException("Incorrect operation: " + leftStr + operation + rightStr);
+            String message = String.format("%s" + leftStr + operation + rightStr,
+                    LocalisationManager.INSTANCE.get("error.incorrectOperation"));
+            Logger.INSTANCE.error(message);
+            throw new CalcException(message);
         }
 
         switch (operation) {
@@ -124,7 +130,9 @@ public class Parser {
             case "/":
                 return left.div(right);
             default:
-                String message = "Incorrect expression";
+                String message = String.format("%s",
+                        LocalisationManager.INSTANCE.get("error.incorrectExpression"));
+                Logger.INSTANCE.error(message);
                 throw new CalcException(message);
         }
     }

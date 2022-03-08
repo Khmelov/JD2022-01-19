@@ -1,9 +1,11 @@
 package by.it.skorobogatyi.calc.variables;
 
-import by.it.skorobogatyi.calc.utils.CalcException;
+import by.it.skorobogatyi.calc.logger.Logger;
+import by.it.skorobogatyi.calc.resources.LocalisationManager;
+import by.it.skorobogatyi.calc.exceptions.CalcException;
 import by.it.skorobogatyi.calc.utils.Operation;
 
-class Matrix extends AbstractVar implements Operation {
+public class Matrix extends AbstractVar implements Operation {
 
     private final double[][] value;
 
@@ -90,7 +92,11 @@ class Matrix extends AbstractVar implements Operation {
 
     @Override
     public AbstractVar add(Vector other) throws CalcException {
-        String message = String.format("Operation addition %s + %s impossible%n", other, this);
+        String submessage = String.format("%s + %s", other, this);
+        String message = String.format("%s: %s%n",
+                LocalisationManager.INSTANCE.get("message.addition"),
+                submessage);
+        Logger.INSTANCE.error(message);
         throw new CalcException(message);
     }
 
@@ -98,13 +104,21 @@ class Matrix extends AbstractVar implements Operation {
     public AbstractVar add(Matrix other) throws CalcException {
 
         if (other.value.length != this.value.length) {
-            String message = String.format("Operation addition %s + %s impossible%n", other, this);
+            String submessage = String.format("%s + %s", other, this);
+            String message = String.format("%s: %s%n",
+                    LocalisationManager.INSTANCE.get("message.addition"),
+                    submessage);
+            Logger.INSTANCE.error(message);
             throw new CalcException(message);
         }
 
         for (int i = 0; i < this.value.length; i++) {
             if (other.value[i].length != this.value[i].length) {
-                String message = String.format("Operation addition %s + %s impossible%n", other, this);
+                String submessage = String.format("%s + %s", other, this);
+                String message = String.format("%s: %s%n",
+                        LocalisationManager.INSTANCE.get("message.addition"),
+                        submessage);
+                Logger.INSTANCE.error(message);
                 throw new CalcException(message);
             }
         }
@@ -143,7 +157,11 @@ class Matrix extends AbstractVar implements Operation {
 
     @Override
     public AbstractVar sub(Vector other) throws CalcException {
-        String message = String.format("Operation subtraction %s - %s impossible%n", other, this);
+        String submessage = String.format("%s - %s", other, this);
+        String message = String.format("%s: %s%n",
+                LocalisationManager.INSTANCE.get("message.subtraction"),
+                submessage);
+        Logger.INSTANCE.error(message);
         throw new CalcException(message);
     }
 
@@ -151,13 +169,21 @@ class Matrix extends AbstractVar implements Operation {
     public AbstractVar sub(Matrix other) throws CalcException {
 
         if (other.value.length != this.value.length) {
-            String message = String.format("Operation subtraction %s - %s impossible%n", other, this);
+            String submessage = String.format("%s - %s", other, this);
+            String message = String.format("%s: %s%n",
+                    LocalisationManager.INSTANCE.get("message.subtraction"),
+                    submessage);
+            Logger.INSTANCE.error(message);
             throw new CalcException(message);
         }
 
         for (int i = 0; i < this.value.length; i++) {
             if (other.value[i].length != this.value[i].length) {
-                String message = String.format("Operation subtraction %s - %s impossible%n", other, this);
+                String submessage = String.format("%s - %s", other, this);
+                String message = String.format("%s: %s%n",
+                        LocalisationManager.INSTANCE.get("message.subtraction"),
+                        submessage);
+                Logger.INSTANCE.error(message);
                 throw new CalcException(message);
             }
         }
@@ -196,7 +222,11 @@ class Matrix extends AbstractVar implements Operation {
     public AbstractVar mul(Vector other) throws CalcException {
 
         if (other.getValue().length != this.value[0].length) {
-            String message = String.format("Operation multiplication %s * %s impossible%n", other, this);
+            String submessage = String.format("%s * %s", other, this);
+            String message = String.format("%s: %s%n",
+                    LocalisationManager.INSTANCE.get("message.multiplication"),
+                    submessage);
+            Logger.INSTANCE.error(message);
             throw new CalcException(message);
         }
 
@@ -215,7 +245,11 @@ class Matrix extends AbstractVar implements Operation {
     public AbstractVar mul(Matrix other) throws CalcException {
 
         if (this.value[0].length != other.value.length) {
-            String message = String.format("Operation multiplication %s * %s impossible%n", other, this);
+            String submessage = String.format("%s * %s", other, this);
+            String message = String.format("%s: %s%n",
+                    LocalisationManager.INSTANCE.get("message.multiplication"),
+                    submessage);
+            Logger.INSTANCE.error(message);
             throw new CalcException(message);
         }
 
@@ -253,19 +287,31 @@ class Matrix extends AbstractVar implements Operation {
             return new Matrix(returnMatrix);
         }
 
-        String message = String.format("Operation division %s / %s impossible%n", this, other);
+        String submessage = String.format("%s / %s", this, other);
+        String message = String.format("%s: %s%n",
+                LocalisationManager.INSTANCE.get("message.division"),
+                submessage);
+        Logger.INSTANCE.error(message);
         throw new CalcException(message);
     }
 
     @Override
     public AbstractVar div(Vector other) throws CalcException {
-        String message = String.format("Operation division %s / %s impossible%n", other, this);
+        String submessage = String.format("%s / %s", other, this);
+        String message = String.format("%s: %s%n",
+                LocalisationManager.INSTANCE.get("message.division"),
+                submessage);
+        Logger.INSTANCE.error(message);
         throw new CalcException(message);
     }
 
     @Override
     public AbstractVar div(Matrix other) throws CalcException {
-        String message = String.format("Operation division %s / %s impossible%n", other, this);
+        String submessage = String.format("%s / %s", other, this);
+        String message = String.format("%s: %s%n",
+                LocalisationManager.INSTANCE.get("message.division"),
+                submessage);
+        Logger.INSTANCE.error(message);
         throw new CalcException(message);
     }
 }

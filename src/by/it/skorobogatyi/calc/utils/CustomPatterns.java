@@ -1,7 +1,7 @@
 package by.it.skorobogatyi.calc.utils;
 
 public class CustomPatterns {
-//-?[\d]+(\.[\d]+)?
+
 
     public static final String SPACES = "\\s+";
     public static final String OPERATION = "(?<=[^-+*/=,{ ])[-+*/=]";
@@ -13,5 +13,7 @@ public class CustomPatterns {
     public static final String COMMAND_SORTVAR = "sortvar";
 
 
-
+    public static final String COMMAND_CHANGE_LANGUAGE_RU = "ru";
+    public static final String COMMAND_CHANGE_LANGUAGE_EN = "en";
+    public static final String COMMAND_CHANGE_LANGUAGE_BY = "be";
 }
