@@ -2,6 +2,7 @@ package by.it.tarend.calc;
 
 import by.it.tarend.calc.controllers.MainController;
 import by.it.tarend.calc.repositories.FileRepository;
+import by.it.tarend.calc.repositories.MapRepository;
 import by.it.tarend.calc.repositories.VarRepository;
 import by.it.tarend.calc.services.CalcService;
 import by.it.tarend.calc.utils.PathFinder;
@@ -15,8 +16,7 @@ public class ConsoleStarter {
         VarRepository repository = new FileRepository(fileName);
         CalcService calcService = new CalcService(repository);
         MainController mainController = new MainController(calcService);
-        Reader reader = new Reader();
-        Application application = new Application(printer, calcService, reader, mainController);
+        Application application = new Application(printer, mainController);
         application.run();
     }
 }

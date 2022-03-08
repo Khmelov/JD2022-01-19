@@ -32,7 +32,8 @@ public class MapRepository implements VarRepository{
             return new Matrix(varValueOrName);
         } else if (variables.containsKey(varValueOrName)) {
             return getByName(varValueOrName);
-        } else
-            throw new ApplicationException("not found" + varValueOrName);
+        }
+
+        throw new ApplicationException("not found " + varValueOrName);
     }
 }

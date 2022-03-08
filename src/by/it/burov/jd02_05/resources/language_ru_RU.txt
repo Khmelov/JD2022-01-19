@@ -1,0 +1,8 @@
+message.greetings = Привет!
+message.question = Как тебя зовут?
+user.info = Меня зовут
+user.firstname = Виталий
+user.lastname = Буров
+zone.time = UTC+3
+
+
