@@ -20,4 +20,8 @@ public class Good {
                 ", price=" + price +
                 '}';
     }
+
+    public Double getPrice() {
+        return null;
+    }
 }
