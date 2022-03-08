@@ -12,19 +12,15 @@ import by.it.kustova.jd02_03.utils.Sleeper;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.concurrent.Semaphore;
 
 public class CustomerWorker extends Thread implements CustomerAction, ShoppingCardAction {
 
     private final Customer customer;
     private final Store store;
-    private final Semaphore semaphore;
-    private int buyGoods = 0;
 
-    public CustomerWorker(Customer customer, Store store, Semaphore semaphore) {
+    public CustomerWorker(Customer customer, Store store) {
         this.customer = customer;
         this.store = store;
-        this.semaphore = semaphore;
         this.setName("Worker for " + customer.toString() + " ");
         store.getManager().customerIn();
 
@@ -34,22 +30,6 @@ public class CustomerWorker extends Thread implements CustomerAction, ShoppingCa
     public void run() {
         enteredStore();
         takeCart();
-        try {
-            for (int i = 0; i < 20; i++) {
-
-                semaphore.acquire();
-                System.out.println(customer + " is choosing goods");
-                Sleeper.sleep(5);
-
-                System.out.println(customer + " chooses goods");
-                semaphore.release();
-
-                Sleeper.sleep(5);
-            }
-
-        } catch (InterruptedException e) {
-            throw new ApplacitionException(e);
-        }
         int fillCart = RandomData.get(2, 5);
         for (int i = 0; i < fillCart; i++) {
             Good good = chooseGood();

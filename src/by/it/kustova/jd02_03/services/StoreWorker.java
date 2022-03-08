@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class StoreWorker extends Thread {
     private final Store store;
+    private final Semaphore semaphore = new Semaphore(20);
 
     public StoreWorker(Store store) {
         this.store = store;
@@ -23,7 +24,6 @@ public class StoreWorker extends Thread {
     @Override
     public void run() {
         Manager manager = store.getManager();
-        Semaphore semaphore = new Semaphore(1);
         System.out.println("Store opened");
         int number = 0;
         ExecutorService cashierThreadPool = Executors.newFixedThreadPool(Store.COUNT_THREADS);
@@ -39,8 +39,15 @@ public class StoreWorker extends Thread {
 
             for (int i = 0; i < count && manager.shopOpened(); i++) {
                 Customer customer = new Customer(++number);
-                CustomerWorker customerWorker = new CustomerWorker(customer, store,semaphore);
-                customerWorker.start();
+                CustomerWorker customerWorker = new CustomerWorker(customer, store);
+                try {
+                    semaphore.acquire();
+                    customerWorker.start();
+                } catch (InterruptedException e) {
+                    throw new ApplacitionException(e);
+                } finally {
+                    semaphore.release();
+                }
             }
             Sleeper.sleep(1000);
         }
@@ -51,6 +58,7 @@ public class StoreWorker extends Thread {
         } catch (InterruptedException e) {
             throw new ApplacitionException(e);
         }
-
     }
 }
+
+
