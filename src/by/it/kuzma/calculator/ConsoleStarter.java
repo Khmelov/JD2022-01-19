@@ -13,7 +13,6 @@ public class ConsoleStarter {
 
     public static final String VARS_TXT = "vars.txt";
     public static final String ROOT = "src";
-
     public static void main(String[] args) {
         Printer printer = new ConsolePrinter();
         String filename = PathFinder.getFilename(Application.class, ROOT, VARS_TXT);

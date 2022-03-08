@@ -1,5 +1,0 @@
-message.greetings = Hallo!
-message.question = Wie heisst du?
-user.info = Ich heisse
-user.firstname = Witaly
-user.lastname = Burow

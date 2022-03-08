@@ -1,6 +1,9 @@
 package by.it.skorobogatyi.calc.utils;
 
+import by.it.skorobogatyi.calc.exceptions.CalcException;
+import by.it.skorobogatyi.calc.logger.Logger;
 import by.it.skorobogatyi.calc.printers.Printer;
+import by.it.skorobogatyi.calc.resources.LocalisationManager;
 import by.it.skorobogatyi.calc.variables.AbstractVar;
 
 import java.util.Scanner;
@@ -18,7 +21,10 @@ public class Application {
 
     public void run() {
 
-        System.out.println("Application started");
+        String message = LocalisationManager.INSTANCE.get("message.applicationStart");
+        System.out.printf("%s%n", message);
+        Logger.getInstance().info(message);
+
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -33,7 +39,9 @@ public class Application {
                     printer.print(e);
                 }
             } else {
-                System.out.println("App finished");
+                message = LocalisationManager.INSTANCE.get("message.applicationFinish");
+                System.out.printf("%s", message);
+                Logger.getInstance().info(message);
                 break;
             }
         }

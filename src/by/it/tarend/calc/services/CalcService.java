@@ -63,11 +63,13 @@ public class CalcService {
             }
             String subExpression = newExpression.substring(openBrace + 1, closeBrace);
 //            System.out.println(subExpression);
+            String bufferString;
             if (subExpression.contains("(")) {
-                calcBracesExpressions(subExpression);
+                bufferString = calcBracesExpressions(subExpression);
             } else {
-                newExpression = newExpression.replace("("+subExpression+")", calcWithoutBraces(subExpression));
+                bufferString = subExpression;
             }
+            newExpression = newExpression.replace("("+subExpression+")", calcWithoutBraces(bufferString));
         }
         return newExpression;
     }

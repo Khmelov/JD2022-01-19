@@ -4,12 +4,15 @@ public class Cashier {
 
     public final String name;
 
+
     public Cashier(int number) {
-        name="Cashier № "+number;
+        this.name = "Cashier № " + number;
     }
+
 
     @Override
     public String toString() {
         return name;
     }
 }
+
