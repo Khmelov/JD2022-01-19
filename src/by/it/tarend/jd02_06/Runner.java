@@ -15,7 +15,5 @@ public class Runner {
             };
             thread.start();
         }
-
     }
-
 }
