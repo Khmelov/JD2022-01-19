@@ -3,7 +3,6 @@ package by.it.kuzma.calculator.servces;
 import by.it.kuzma.calculator.exceptions.CalcException;
 import by.it.kuzma.calculator.repositories.VarRepository;
 import by.it.kuzma.calculator.utils.Patterns;
-import by.it.kuzma.calculator.repositories.MapRepository;
 import by.it.kuzma.calculator.model.Var;
 
 import java.util.ArrayList;
