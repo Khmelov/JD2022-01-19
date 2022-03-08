@@ -1,9 +1,9 @@
 package by.it.yushkevich.jd02_05;
 
-import by.it.yushkevich.jd02_05.resources.ResourceManager;
+import by.it.yushkevich.jd02_05.constants.Messages;
+import by.it.yushkevich.jd02_05.constants.User;
 
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class TaskA {
 
@@ -17,13 +17,11 @@ public class TaskA {
         }
 
         System.out.printf("%s\n%s\n%s %s %s \n",
-                lang.get("messages.welcome"),
-                lang.get("messages.question"),
-                lang.get("user.info"),
-                lang.get("user.firstname"),
-                lang.get("user.lastname")
+                lang.get(Messages.WELCOME),
+                lang.get(Messages.QUESTION),
+                lang.get(User.INFO),
+                lang.get(User.FIRSTNAME),
+                lang.get(User.LASTNAME)
         );
-
-
     }
 }

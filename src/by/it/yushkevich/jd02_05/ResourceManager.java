@@ -1,4 +1,4 @@
-package by.it.yushkevich.jd02_05.resources;
+package by.it.yushkevich.jd02_05;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
