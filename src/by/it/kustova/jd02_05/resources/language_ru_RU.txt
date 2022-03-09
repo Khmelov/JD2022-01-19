@@ -1,0 +1,6 @@
+messages.welcome=Привет!
+messages.question=Как дела?
+user.info=Меня зовут
+user.firstname=Оливия
+user.lastname=Кустова
+time.zone= UTC+3

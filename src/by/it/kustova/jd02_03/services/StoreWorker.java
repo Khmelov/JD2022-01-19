@@ -10,12 +10,12 @@ import by.it.kustova.jd02_03.utils.Sleeper;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-import static by.it._classwork_.jd02_03.entity.Store.COUNT_THREADS;
-
-public class StoreWorker extends Thread{
+public class StoreWorker extends Thread {
     private final Store store;
+    private final Semaphore semaphore = new Semaphore(20);
 
     public StoreWorker(Store store) {
         this.store = store;
@@ -26,24 +26,33 @@ public class StoreWorker extends Thread{
         Manager manager = store.getManager();
         System.out.println("Store opened");
         int number = 0;
-        ExecutorService cashierTheadPool = Executors.newFixedThreadPool(COUNT_THREADS);
-        for (int i = 1; i <= store.COUNT_CASHIERS; i++) {
+        ExecutorService cashierThreadPool = Executors.newFixedThreadPool(Store.COUNT_THREADS);
+        for (int i = 1; i <= Store.COUNT_CASHIER; i++) {
             Cashier cashier = new Cashier(i);
             CashierWorker cashierWorker = new CashierWorker(cashier, store);
-            cashierTheadPool.submit(cashierWorker);
+            cashierThreadPool.submit(cashierWorker);
         }
-        cashierTheadPool.shutdown();
+        cashierThreadPool.shutdown();
+
         while (manager.shopOpened()) {
             int count = RandomData.get(2);
+
             for (int i = 0; i < count && manager.shopOpened(); i++) {
                 Customer customer = new Customer(++number);
-                CustomerWorker customerWorker = new CustomerWorker(store, customer);
-                customerWorker.start();
+                CustomerWorker customerWorker = new CustomerWorker(customer, store);
+                try {
+                    semaphore.acquire();
+                    customerWorker.start();
+                } catch (InterruptedException e) {
+                    throw new ApplacitionException(e);
+                } finally {
+                    semaphore.release();
+                }
             }
             Sleeper.sleep(1000);
         }
         try {
-            if (cashierTheadPool.awaitTermination(1, TimeUnit.DAYS)) {
+            if (cashierThreadPool.awaitTermination(1, TimeUnit.DAYS)) {
                 System.out.println("Store closed");
             }
         } catch (InterruptedException e) {
@@ -51,3 +60,5 @@ public class StoreWorker extends Thread{
         }
     }
 }
+
+

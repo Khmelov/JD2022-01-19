@@ -1,0 +1,7 @@
+messages.welcome=Hi!
+messages.question=How are you?
+user.info=My name is
+user.firstname=Olivia
+user.lastname=Kustova
+zone.time=UTC-5;
+
