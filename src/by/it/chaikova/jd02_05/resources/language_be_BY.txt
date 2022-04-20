@@ -1,6 +1,0 @@
-messages.welcome= Вiтаю!
-messages.question= Як справы ?
-user.info= Мае iмя
-user.firstname= Ганна
-user.lastname= Чайкова
-

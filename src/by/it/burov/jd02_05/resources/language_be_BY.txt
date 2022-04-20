@@ -1,6 +1,0 @@
-message.greetings = Прiвет!
-message.question = Як цябе клічуць?
-user.info = Мяне завуць
-user.firstname = Віталій
-user.lastname =  Бураў
-zone.time = UTC+3

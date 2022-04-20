@@ -1,6 +1,0 @@
-messages.welcome=Привет!
-messages.question=как дела?
-user.info = меня зовут
-user.firstname = Павел
-user.lastname = Юшкевич
-zone.time = UTC+3

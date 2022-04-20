@@ -1,5 +1,0 @@
-messages.welcome=Прывітанне!
-messages.question=Як справы?
-user.info= Мяне зваць
-user.firstname=Яўгеній
-user.lastname=Кузьма

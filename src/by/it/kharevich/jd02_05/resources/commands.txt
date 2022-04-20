@@ -1,1 +1,0 @@
-command.time=MM-dd-yyyy HH:mm:ss

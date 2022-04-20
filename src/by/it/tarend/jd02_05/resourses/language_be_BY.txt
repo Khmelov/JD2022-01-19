@@ -1,6 +1,0 @@
-messages.welcome=Прывитанне!
-messages.question=Як справы?
-user.info=Маё имя
-user.firstname=Максим
-user.lastname=Тарэндзь
-messages.date=Дата

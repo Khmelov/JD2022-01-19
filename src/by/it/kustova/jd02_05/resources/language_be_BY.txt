@@ -1,7 +1,0 @@
-messages.welcome=Прывятанне!
-messages.question=Як дялы?
-user.info=Мяне завуць!
-user.firstname=Олiвiя
-user.lastname=Кустова
-time.zone= UTC+3
-
